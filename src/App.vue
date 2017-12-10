@@ -6,22 +6,21 @@
 </template>
 
 <script>
-import routeNameMappings from './router/route-name-mappings'
+import getTitle from './router/title-logic'
 
 export default {
   name: 'app',
   data () {
     return {
-      title: 'Deposit your ETH'
+      title: ''
     }
+  },
+  created () {
+    this.title = getTitle(window.location.href)
   },
   watch: {
     '$route': function (newRoute, oldRoute) {
-      switch (newRoute.name) {
-        case routeNameMappings.DepositEth:
-          this.title = 'Deposit your ETH'
-          break
-      }
+      this.title = getTitle(newRoute.path)
     }
   }
 }

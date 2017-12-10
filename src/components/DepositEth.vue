@@ -1,7 +1,14 @@
 <template>
   <div>
-    <div class="black">
-      {{ generatedEthTaskAddress }}
+    <!-- <toast :show="showToast"/> -->
+    <div v-once class="mt5 f3 catamaran tc">
+      Deposit ETH to the address below. This address is your EthTask Ethereum address, and will hold your balance.
+    </div>
+    <div id="ethAddress" class="main-color ba mt4 mw8 pa3 f1 center br3 bw1 tc">
+      {{ ethTaskAddress }}
+    </div>
+    <div @click="copyToClipboard()" class="mw3 center mt3 hover-pointer">
+      <img src="src/assets/clipboard.png">
     </div>
   </div>
 </template>
@@ -9,9 +16,31 @@
 <script>
 export default {
   name: 'DepositEth',
+  data () {
+    return {
+      showToast: false
+    }
+  },
   computed: {
-    generatedEthTaskAddress: function () {
-      return '0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae'
+    ethTaskAddress: function () {
+      return this.$store.state.ethTaskAddress
+    }
+  },
+  methods: {
+    copyToClipboard: function () {
+      if (document.selection) {
+        const range = document.body.createTextRange()
+        range.moveToElementText(document.getElementById('ethAddress'))
+        range.select().createTextRange()
+        document.execCommand('copy')
+        this.showToast = true
+      } else if (window.getSelection) {
+        const range = document.createRange()
+        range.selectNode(document.getElementById('ethAddress'))
+        window.getSelection().addRange(range)
+        document.execCommand('copy')
+        this.showToast = true
+      }
     }
   }
 }

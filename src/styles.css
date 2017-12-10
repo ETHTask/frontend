@@ -2,6 +2,27 @@
   background-color: #5991DC;
 }
 
+.bg-danger-color {
+  background-color: #CA5B54;
+}
+
+.bg-success-color {
+  background-color: #73B566;
+}
+
+.b--main-color {
+  border-color: #5991DC;
+}
+
+.disabled-btn {
+  background-color: #cccccc;
+  color: #666666;
+}
+
+.main-color {
+  color: #5991DC;
+}
+
 .raleway {
   font-family: 'Raleway', sans-serif;
 }
@@ -20,4 +41,16 @@
 
 .slabo {
   font-family: 'Slabo 27px', serif;
+}
+
+.hover-pointer:hover {
+  cursor: pointer;
+}
+
+.hover-disabled:hover {
+  cursor: not-allowed;
+}
+
+.mw2-5 {
+  max-width: 3rem;
 }
