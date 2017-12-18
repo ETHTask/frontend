@@ -1,7 +1,7 @@
 export default {
   DepositEth: {
     name: 'DepositEth',
-    path: '/'
+    path: '/deposit'
   },
   ImportTeam: {
     name: 'ImportTeam',

@@ -1,14 +1,15 @@
 <template>
   <div>
-    <!-- <toast :show="showToast"/> -->
     <div v-once class="mt5 f3 catamaran tc">
       Deposit ETH to the address below. This address is your EthTask Ethereum address, and will hold your balance.
     </div>
     <div id="ethAddress" class="main-color ba mt4 mw8 pa3 f1 center br3 bw1 tc">
       {{ ethTaskAddress }}
     </div>
-    <div @click="copyToClipboard()" class="mw3 center mt3 hover-pointer">
-      <img src="static/assets/clipboard.png">
+    <div class="center tc pa3" @click="copyToClipboard()">
+      <button class="pa3 bg-main-color br4 f3 hover-pointer">
+        <img src="static/assets/clipboard.png" class="mw3">
+      </button>
     </div>
   </div>
 </template>

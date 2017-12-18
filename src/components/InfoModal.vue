@@ -5,7 +5,7 @@
         <div :class="configObj.theme" class="white">
           <h3 class="f3 pa3 tc">{{ configObj.title }}</h3>
         </div>
-        <div class="black ph3 pb3 lh-copy">
+        <div class="ph3 pb3 lh-copy" :class="configObj.messageClass">
           {{ configObj.message }}
         </div>
         <div class="pa3 tc">

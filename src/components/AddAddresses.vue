@@ -1,5 +1,5 @@
 <template>
-  <div class="tl pa3">
+  <div class="tl pa3 catamaran mt4">
     <span class="f3">Your team members</span>
     <div class="ba pl3 pv3 mt4 b--black-10 shadow-4 cf" v-for="member in teamMembers">
       <div class="fl">

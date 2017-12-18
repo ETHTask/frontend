@@ -13,8 +13,25 @@ export const getTitle = (path) => {
   if (path.includes(routeNameMappings.Reward.path)) {
     return 'Task complete!'
   }
-  if (path.includes(routeNameMappings.Login.path)) {
-    return 'Welcome!'
+  if (path.includes(routeNameMappings.DepositEth.path)) {
+    return 'Deposit your ETH'
   }
-  return 'Deposit your ETH'
+  return 'Welcome!'
+}
+
+export const getBalanceShowing = (path) => {
+  if (path.includes(routeNameMappings.Login.path)) {
+    return false
+  }
+  return true
+}
+
+export const getDepositShowing = (path) => {
+  if (path.includes(routeNameMappings.Login.path)) {
+    return false
+  }
+  if (path.includes(routeNameMappings.DepositEth.path)) {
+    return false
+  }
+  return true
 }

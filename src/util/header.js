@@ -6,3 +6,11 @@ export const shouldShowHeader = (path) => {
   }
   return true
 }
+
+export const getDefaultHeaderConfigObj = () => {
+  return {
+    title: '',
+    showBalance: false,
+    showDeposit: false
+  }
+}

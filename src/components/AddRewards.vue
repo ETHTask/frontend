@@ -1,5 +1,5 @@
 <template>
-  <div class="tl pa3">
+  <div class="tl pa3 catamaran">
     <span class="f3">Your open tasks</span>
     <div class="ba pl3 pv3 mt4 b--black-10 shadow-4 cf" v-for="task in tasks">
       <div class="fl">

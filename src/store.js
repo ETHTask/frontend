@@ -31,6 +31,7 @@ export const state = {
   loggedInUser: {
     name: '',
     logo: '',
+    email: '',
     ethTaskAddress: '',
     ethTaskBalance: 0,
     repFirstName: '',
@@ -48,6 +49,6 @@ export const mutations = {
       'ethAddress': 'ethTaskAddress',
       'ethBalance': 'ethTaskBalance'
     })
-    console.log('logged in user set ', state.loggedInUser)
+    console.log('Logged in user set: ', state.loggedInUser)
   }
 }

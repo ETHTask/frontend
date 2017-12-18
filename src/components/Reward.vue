@@ -1,5 +1,5 @@
 <template>
-  <div class="tc">
+  <div class="tc catamaran">
     <div class="ba b--main-color bw1 br3 pt3 pb2 mw6 center mt4">
       <div class="f3">Task ID: {{ taskID }}</div>
       <img src="static/assets/eye.png" class="mw3 mt3"/>

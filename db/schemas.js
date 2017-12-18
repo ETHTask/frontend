@@ -14,6 +14,7 @@ var WorkerSchema = new Schema({
 var OrganizationSchema = new Schema({
     name: String,
     logo: String,
+    email: String,
     repFirstName: String,
     repLastName: String,
     ethBalance: Number,
