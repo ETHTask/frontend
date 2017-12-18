@@ -5,6 +5,7 @@ import DepositEth from '@/components/DepositEth'
 import ImportTeam from '@/components/ImportTeam'
 import AddAddresses from '@/components/AddAddresses'
 import AddRewards from '@/components/AddRewards'
+import Login from '@/components/Login'
 import Reward from '@/components/Reward'
 import routeNameMappings from './route-name-mappings'
 
@@ -36,6 +37,11 @@ export default new Router({
       path: routeNameMappings.Reward.path,
       name: routeNameMappings.Reward.name,
       component: Reward
+    },
+    {
+      path: routeNameMappings.Login.path,
+      name: routeNameMappings.Login.name,
+      component: Login
     }
   ]
 })

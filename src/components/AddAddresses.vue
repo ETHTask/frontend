@@ -15,8 +15,8 @@
         <input class="mt3 w-100 bt-0 bl-0 br-0 b--black-20 f3 main-color" v-model="member.ethAddress"/>
       </div>
       <div class="fl pl6 pt4 w-10-ns">
-        <img v-if="!isValidAddress(member.ethAddress)" src="src/assets/x.png" class="mw2"/>
-        <img v-if="isValidAddress(member.ethAddress)" src="src/assets/checkmark.png" class="mw2-5"/>
+        <img v-if="!isValidAddress(member.ethAddress)" src="static/assets/x.png" class="mw2"/>
+        <img v-if="isValidAddress(member.ethAddress)" src="static/assets/checkmark.png" class="mw2-5"/>
       </div>
     </div>
     <div class="tc">

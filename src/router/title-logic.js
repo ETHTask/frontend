@@ -1,6 +1,6 @@
 import routeNameMappings from './route-name-mappings'
 
-export default function (path) {
+export const getTitle = (path) => {
   if (path.includes(routeNameMappings.ImportTeam.path)) {
     return 'Import your team members'
   }
@@ -12,6 +12,9 @@ export default function (path) {
   }
   if (path.includes(routeNameMappings.Reward.path)) {
     return 'Task complete!'
+  }
+  if (path.includes(routeNameMappings.Login.path)) {
+    return 'Welcome!'
   }
   return 'Deposit your ETH'
 }

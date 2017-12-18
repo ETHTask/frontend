@@ -1,11 +1,13 @@
+import { mapTo } from './util/object'
+
 export const state = {
   jiraMembers: [
     {
-      imageUrl: 'src/assets/ace.png',
+      imageUrl: 'static/assets/ace.png',
       name: 'Ace O\'Neal'
     },
     {
-      imageUrl: 'src/assets/kate.png',
+      imageUrl: 'static/assets/kate.png',
       name: 'Kate Coco'
     }
   ],
@@ -19,19 +21,33 @@ export const state = {
       id: '12'
     }
   ],
-  ethTaskAddress: '0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae',
-  ethTaskBalance: 100,
   finishedTask: {
     hero: {
-      imageUrl: 'src/assets/kate.png',
+      imageUrl: 'static/assets/kate.png',
       name: 'Kate Coco'
     },
     id: '12'
+  },
+  loggedInUser: {
+    name: '',
+    logo: '',
+    ethTaskAddress: '',
+    ethTaskBalance: 0,
+    repFirstName: '',
+    repLastName: '',
+    workers: []
   }
 }
 
 export const mutations = {
   setJiraMembers (state, members) {
     state.jiraMembers = members
+  },
+  setLoggedInUser (state, user) {
+    state.loggedInUser = mapTo({}, user, {
+      'ethAddress': 'ethTaskAddress',
+      'ethBalance': 'ethTaskBalance'
+    })
+    console.log('logged in user set ', state.loggedInUser)
   }
 }

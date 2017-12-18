@@ -6,7 +6,7 @@
         <div class="mb3 black-50">
           Task ID: {{ task.id }}
         </div>
-        <img src="src/assets/eye.png" class="mw3"/>
+        <img src="static/assets/eye.png" class="mw3"/>
       </div>
       <div class="fl pl4 w-80-ns">
         <div class="mb3 black-50">
@@ -15,8 +15,8 @@
         <input class="mt3 w-100 bt-0 bl-0 br-0 b--black-20 f3 main-color" v-model="task.ethReward"/>
       </div>
       <div class="fl pl6 pt4 w-10-ns">
-        <img v-if="!isValidReward(task.ethReward)" src="src/assets/x.png" class="mw2"/>
-        <img v-if="isValidReward(task.ethReward)" src="src/assets/checkmark.png" class="mw2-5"/>
+        <img v-if="!isValidReward(task.ethReward)" src="static/assets/x.png" class="mw2"/>
+        <img v-if="isValidReward(task.ethReward)" src="static/assets/checkmark.png" class="mw2-5"/>
       </div>
     </div>
     <div class="tc">
@@ -71,7 +71,7 @@ export default {
         return
       }
 
-      if (this.totalRewards > this.$store.state.ethTaskBalance) {
+      if (this.totalRewards > this.$store.state.loggedInUser.ethTaskBalance) {
         this.modalConfigObject = {
           title: modalTitle,
           message: 'Sorry, the total rewards you entered exceed your ETH balance! Lower the rewards or deposit more ETH :)',

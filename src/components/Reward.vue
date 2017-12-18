@@ -2,7 +2,7 @@
   <div class="tc">
     <div class="ba b--main-color bw1 br3 pt3 pb2 mw6 center mt4">
       <div class="f3">Task ID: {{ taskID }}</div>
-      <img src="src/assets/eye.png" class="mw3 mt3"/>
+      <img src="static/assets/eye.png" class="mw3 mt3"/>
     </div>
     <div class="ba b--main-color pb2 mw6 mt4 center">
       <header class="bg-main-color w-100 ph2 pv2 pv2-ns ph2-m ph5-l center tc">

@@ -18,5 +18,9 @@ export default {
   Reward: {
     name: 'Reward',
     path: '/reward'
+  },
+  Login: {
+    name: 'Login',
+    path: '/login'
   }
 }

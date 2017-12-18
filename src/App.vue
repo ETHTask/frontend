@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import getTitle from './router/title-logic'
+import { getTitle } from './router/title-logic'
 
 export default {
   name: 'app',

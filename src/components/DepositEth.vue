@@ -8,7 +8,7 @@
       {{ ethTaskAddress }}
     </div>
     <div @click="copyToClipboard()" class="mw3 center mt3 hover-pointer">
-      <img src="src/assets/clipboard.png">
+      <img src="static/assets/clipboard.png">
     </div>
   </div>
 </template>
@@ -23,7 +23,7 @@ export default {
   },
   computed: {
     ethTaskAddress: function () {
-      return this.$store.state.ethTaskAddress
+      return this.$store.state.loggedInUser.ethTaskAddress
     }
   },
   methods: {
