@@ -14,10 +14,12 @@ export const getDefaultHeaderConfigObj = () => {
     showDeposit: false,
     showMembers: false,
     showTasks: false,
+    showImport: false,
     onBalanceClick: () => {},
     onDepositClick: () => {},
     onMembersClick: () => {},
     onTasksClick: () => {},
-    onHamburgerClick: () => {}
+    onHamburgerClick: () => {},
+    onImportClick: () => {}
   }
 }

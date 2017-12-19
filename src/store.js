@@ -1,26 +1,8 @@
-import { mapTo } from './util/object'
+import { mapTo, addKeyToEachElement } from './util/object'
 
 export const state = {
-  jiraMembers: [
-    {
-      imageUrl: 'static/assets/ace.png',
-      name: 'Ace O\'Neal'
-    },
-    {
-      imageUrl: 'static/assets/kate.png',
-      name: 'Kate Coco'
-    }
-  ],
-  jiraTasks: [
-    {
-      url: '',
-      id: '11'
-    },
-    {
-      url: '',
-      id: '12'
-    }
-  ],
+  jiraMembers: [],
+  jiraTasks: [],
   finishedTask: {
     hero: {
       imageUrl: 'static/assets/kate.png',
@@ -42,7 +24,16 @@ export const state = {
 
 export const mutations = {
   setJiraMembers (state, members) {
-    state.jiraMembers = members
+    const membersFromAPI = members[0]
+    const membersFromDB = members[1]
+    state.jiraMembers = addKeyToEachElement(membersFromAPI, membersFromDB, 'ethAddress')
+    console.log('JIRA members set: ', state.jiraMembers)
+  },
+  setJiraTasks (state, tasks) {
+    const tasksFromAPI = tasks[0]
+    const tasksFromDB = tasks[1]
+    state.jiraTasks = addKeyToEachElement(tasksFromAPI, tasksFromDB, 'ethReward')
+    console.log('JIRA tasks set: ', state.jiraTasks)
   },
   setLoggedInUser (state, user) {
     state.loggedInUser = mapTo({}, user, {

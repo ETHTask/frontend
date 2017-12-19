@@ -14,7 +14,8 @@ import {
   getDepositShowing,
   getTasksShowing,
   getMembersShowing,
-  getHamburgerShowing
+  getHamburgerShowing,
+  getImportShowing
 } from './router/header-logic'
 import routeNameMappings from './router/route-name-mappings'
 import {
@@ -56,6 +57,7 @@ export default {
         onDepositClick: this.onDepositClick,
         onMembersClick: this.onMembersClick,
         onTasksClick: this.onTasksClick,
+        onImportClick: this.onImportClick,
         onClose: () => {
           self.showNavModal = false
         }
@@ -66,10 +68,13 @@ export default {
       this.$router.push(routeNameMappings.DepositEth)
     },
     onMembersClick: function () {
-      this.$router.push(routeNameMappings.AddAddresses)
+      this.$router.push(routeNameMappings.TeamMembers)
     },
     onTasksClick: function () {
-      this.$router.push(routeNameMappings.AddRewards)
+      this.$router.push(routeNameMappings.Tasks)
+    },
+    onImportClick: function () {
+      this.$router.push(routeNameMappings.Import)
     }
   },
   created () {
@@ -79,11 +84,13 @@ export default {
     this.headerConfigObj.showTasks = getTasksShowing(window.location.href)
     this.headerConfigObj.showMembers = getMembersShowing(window.location.href)
     this.headerConfigObj.showHamburger = getHamburgerShowing(window.location.href)
+    this.headerConfigObj.showImport = getImportShowing(window.location.href)
     this.headerConfigObj.onBalanceClick = this.onBalanceClick
     this.headerConfigObj.onDepositClick = this.onDepositClick
     this.headerConfigObj.onMembersClick = this.onMembersClick
     this.headerConfigObj.onTasksClick = this.onTasksClick
     this.headerConfigObj.onHamburgerClick = this.onHamburgerClick
+    this.headerConfigObj.onImportClick = this.onImportClick
   },
   watch: {
     '$route': function (newRoute, oldRoute) {
@@ -93,6 +100,7 @@ export default {
       this.headerConfigObj.showTasks = getTasksShowing(window.location.href)
       this.headerConfigObj.showMembers = getMembersShowing(window.location.href)
       this.headerConfigObj.showHamburger = getHamburgerShowing(window.location.href)
+      this.headerConfigObj.showImport = getImportShowing(window.location.href)
     }
   }
 }

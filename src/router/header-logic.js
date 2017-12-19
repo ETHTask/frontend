@@ -1,14 +1,14 @@
 import routeNameMappings from './route-name-mappings'
 
 export const getTitle = (path) => {
-  if (path.includes(routeNameMappings.ImportTeam.path)) {
-    return 'Import your team members'
+  if (path.includes(routeNameMappings.Import.path)) {
+    return 'Import from JIRA'
   }
-  if (path.includes(routeNameMappings.AddAddresses.path)) {
-    return 'Add ETH addresses'
+  if (path.includes(routeNameMappings.TeamMembers.path)) {
+    return 'Your team members'
   }
-  if (path.includes(routeNameMappings.AddRewards.path)) {
-    return 'Add ETH rewards'
+  if (path.includes(routeNameMappings.Tasks.path)) {
+    return 'Your open tasks'
   }
   if (path.includes(routeNameMappings.Reward.path)) {
     return 'Task complete!'
@@ -47,7 +47,7 @@ export const getMembersShowing = (path) => {
   if (path.includes(routeNameMappings.Login.path)) {
     return false
   }
-  if (path.includes(routeNameMappings.AddAddresses.path)) {
+  if (path.includes(routeNameMappings.TeamMembers.path)) {
     return false
   }
   return true
@@ -57,7 +57,17 @@ export const getTasksShowing = (path) => {
   if (path.includes(routeNameMappings.Login.path)) {
     return false
   }
-  if (path.includes(routeNameMappings.AddRewards.path)) {
+  if (path.includes(routeNameMappings.Tasks.path)) {
+    return false
+  }
+  return true
+}
+
+export const getImportShowing = (path) => {
+  if (path.includes(routeNameMappings.Login.path)) {
+    return false
+  }
+  if (path.includes(routeNameMappings.Import.path)) {
     return false
   }
   return true

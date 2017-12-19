@@ -9,6 +9,7 @@ var WorkerSchema = new Schema({
     jiraID: String,
     firstName: String,
     lastName: String,
+    ethAddress: String,
     completedJiraTasks: [JiraTaskSchema]
 });
 var OrganizationSchema = new Schema({

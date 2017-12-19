@@ -13,6 +13,7 @@ export const getDefaultNavModalConfigObj = () => {
     onDepositClick: () => {},
     onMembersClick: () => {},
     onTasksClick: () => {},
+    onImportClick: () => {},
     onClose: () => {}
   }
 }

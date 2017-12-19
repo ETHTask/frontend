@@ -2,9 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import DepositEth from '@/components/DepositEth'
-import ImportTeam from '@/components/ImportTeam'
-import AddAddresses from '@/components/AddAddresses'
-import AddRewards from '@/components/AddRewards'
+import Import from '@/components/Import'
+import TeamMembers from '@/components/TeamMembers'
+import Tasks from '@/components/Tasks'
 import Login from '@/components/Login'
 import Reward from '@/components/Reward'
 import routeNameMappings from './route-name-mappings'
@@ -19,19 +19,19 @@ export default new Router({
       component: DepositEth
     },
     {
-      path: routeNameMappings.ImportTeam.path,
-      name: routeNameMappings.ImportTeam.name,
-      component: ImportTeam
+      path: routeNameMappings.Import.path,
+      name: routeNameMappings.Import.name,
+      component: Import
     },
     {
-      path: routeNameMappings.AddAddresses.path,
-      name: routeNameMappings.AddAddresses.name,
-      component: AddAddresses
+      path: routeNameMappings.TeamMembers.path,
+      name: routeNameMappings.TeamMembers.name,
+      component: TeamMembers
     },
     {
-      path: routeNameMappings.AddRewards.path,
-      name: routeNameMappings.AddRewards.name,
-      component: AddRewards
+      path: routeNameMappings.Tasks.path,
+      name: routeNameMappings.Tasks.name,
+      component: Tasks
     },
     {
       path: routeNameMappings.Reward.path,

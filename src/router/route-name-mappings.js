@@ -3,17 +3,17 @@ export default {
     name: 'DepositEth',
     path: '/deposit'
   },
-  ImportTeam: {
-    name: 'ImportTeam',
-    path: '/import-team'
+  Import: {
+    name: 'Import',
+    path: '/import'
   },
-  AddAddresses: {
-    name: 'AddAddresses',
-    path: '/add-addresses'
+  TeamMembers: {
+    name: 'TeamMembers',
+    path: '/team-members'
   },
-  AddRewards: {
-    name: 'AddRewards',
-    path: '/add-rewards'
+  Tasks: {
+    name: 'Tasks',
+    path: '/tasks'
   },
   Reward: {
     name: 'Reward',
