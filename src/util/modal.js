@@ -6,3 +6,13 @@ export const getDefaultInfoModalConfigObj = () => {
     onClose: () => {}
   }
 }
+
+export const getDefaultNavModalConfigObj = () => {
+  return {
+    onBalanceClick: () => {},
+    onDepositClick: () => {},
+    onMembersClick: () => {},
+    onTasksClick: () => {},
+    onClose: () => {}
+  }
+}

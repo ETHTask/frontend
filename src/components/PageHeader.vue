@@ -1,20 +1,39 @@
 <template>
-  <nav class="dt w-100 border-box ph3 pv3 pv3-ns ph4-m ph5-l center main-color bw1 bg-white bb b--main-color">
+  <nav class="dt w-100 border-box ph3 pv3 pv3-ns ph4-m ph5-l center white bg-main-color shadow-4 catamaran">
     <span
-      class="dtc f3 catamaran f2-ns" :class="{tc:!configObj.showBalance}">
+      class="dtc f3 catamaran b" :class="{tc:!configObj.showBalance}">
       {{ configObj.title }}
     </span>
-    <div v-show="configObj.showBalance" class="dtc w-25 tr" @click="configObj.onBalanceClick()">
-      <button class="bg-main-color white pa2 ph4 br3 ba f4 f3-ns hover-pointer">
+    <div class="hide-small">
+      <div v-show="configObj.showBalance" class="dtc w-10 tr white f5 hover-pointer" @click="configObj.onBalanceClick()">
         Balance
-      </button>
-    </div>
-    <div v-show="configObj.showDeposit" class="dtc w-25 tr" @click="configObj.onDepositClick()">
-      <button class="bg-main-color white pa2 ph4 br3 ba f4 f3-ns hover-pointer">
+      </div>
+      <div v-show="configObj.showDeposit" class="dtc w-10 tr white f5 hover-pointer" @click="configObj.onDepositClick()">
         Deposit
-      </button>
+      </div>
+      <div v-show="configObj.showMembers" class="dtc w-10 tr white f5 hover-pointer" @click="configObj.onMembersClick()">
+        Members
+      </div>
+      <div v-show="configObj.showTasks" class="dtc w-10 tr white f5 hover-pointer" @click="configObj.onTasksClick()">
+        Tasks
+      </div>
+    </div>
+    <div v-show="configObj.showHamburger" class="show-small f3 hover-pointer" @click="configObj.onHamburgerClick()">
+      &#9776;
     </div>
   </nav>
+  <!-- <nav class="db dt-l w-100 border-box pa3 ph5-l">
+  <a class="db dtc-l v-mid mid-gray link dim w-100 w-25-l tc tl-l mb2 mb0-l" href="#" title="Home">
+    <img src="http://tachyons.io/img/logo.jpg" class="dib w2 h2 br-100" alt="Site Name">
+  </a>
+  <div class="db dtc-l v-mid w-100 w-75-l tc tr-l">
+    <a class="link dim dark-gray f6 f5-l dib mr3 mr4-l" href="#" title="Home">Home</a>
+    <a class="link dim dark-gray f6 f5-l dib mr3 mr4-l" href="#" title="How it Works">How it Works</a>
+    <a class="link dim dark-gray f6 f5-l dib mr3 mr4-l" href="#" title="Blog">Blog</a>
+    <a class="link dim dark-gray f6 f5-l dib mr3 mr4-l" href="#" title="Press">Press</a>
+    <a class="link dim dark-gray f6 f5-l dib" href="#" title="Contact">Contact</a>
+  </div>
+</nav> -->
 </template>
 
 <script>

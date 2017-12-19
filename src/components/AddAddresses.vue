@@ -1,20 +1,20 @@
 <template>
-  <div class="tl pa3 catamaran mt4">
+  <div class="tl pa5-ns pa4 catamaran">
     <span class="f3">Your team members</span>
-    <div class="ba pl3 pv3 mt4 b--black-10 shadow-4 cf" v-for="member in teamMembers">
-      <div class="fl">
+    <div class="tc tl-ns ba pl3-ns pv3 mt4 b--black-10 shadow-4 cf" v-for="member in teamMembers">
+      <div class="fl-ns">
         <div class="mb3 black-50">
           {{ member.name }}
         </div>
         <img :src="member.imageUrl" class="mw3"/>
       </div>
-      <div class="fl pl4 w-80-ns">
-        <div class="mb3 black-50">
+      <div class="fl-ns pl4-ns w-80-ns pt3 pt0-ns">
+        <div class="mb3-ns black-50">
           ETH Address
         </div>
-        <input class="mt3 w-100 bt-0 bl-0 br-0 b--black-20 f3 main-color" v-model="member.ethAddress"/>
+        <input class="mt3-ns w-100-ns w-90 bt-0 bl-0 br-0 b--black-20 f3 main-color" v-model="member.ethAddress"/>
       </div>
-      <div class="fl pl6 pt4 w-10-ns">
+      <div class="fl-ns pl6-ns pt4 w-10-ns">
         <img v-if="!isValidAddress(member.ethAddress)" src="static/assets/x.png" class="mw2"/>
         <img v-if="isValidAddress(member.ethAddress)" src="static/assets/checkmark.png" class="mw2-5"/>
       </div>

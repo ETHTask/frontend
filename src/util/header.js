@@ -11,6 +11,13 @@ export const getDefaultHeaderConfigObj = () => {
   return {
     title: '',
     showBalance: false,
-    showDeposit: false
+    showDeposit: false,
+    showMembers: false,
+    showTasks: false,
+    onBalanceClick: () => {},
+    onDepositClick: () => {},
+    onMembersClick: () => {},
+    onTasksClick: () => {},
+    onHamburgerClick: () => {}
   }
 }

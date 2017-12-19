@@ -19,6 +19,13 @@ export const getTitle = (path) => {
   return 'Welcome!'
 }
 
+export const getHamburgerShowing = (path) => {
+  if (path.includes(routeNameMappings.Login.path)) {
+    return false
+  }
+  return true
+}
+
 export const getBalanceShowing = (path) => {
   if (path.includes(routeNameMappings.Login.path)) {
     return false
@@ -31,6 +38,26 @@ export const getDepositShowing = (path) => {
     return false
   }
   if (path.includes(routeNameMappings.DepositEth.path)) {
+    return false
+  }
+  return true
+}
+
+export const getMembersShowing = (path) => {
+  if (path.includes(routeNameMappings.Login.path)) {
+    return false
+  }
+  if (path.includes(routeNameMappings.AddAddresses.path)) {
+    return false
+  }
+  return true
+}
+
+export const getTasksShowing = (path) => {
+  if (path.includes(routeNameMappings.Login.path)) {
+    return false
+  }
+  if (path.includes(routeNameMappings.AddRewards.path)) {
     return false
   }
   return true

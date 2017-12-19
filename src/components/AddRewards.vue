@@ -1,20 +1,20 @@
 <template>
-  <div class="tl pa3 catamaran">
+  <div class="tl pa5-ns pa4 catamaran">
     <span class="f3">Your open tasks</span>
-    <div class="ba pl3 pv3 mt4 b--black-10 shadow-4 cf" v-for="task in tasks">
-      <div class="fl">
+    <div class="tc tl-ns ba pl3 pv3 mt4 b--black-10 shadow-4 cf" v-for="task in tasks">
+      <div class="fl-ns">
         <div class="mb3 black-50">
           Task ID: {{ task.id }}
         </div>
         <img src="static/assets/eye.png" class="mw3"/>
       </div>
-      <div class="fl pl4 w-80-ns">
-        <div class="mb3 black-50">
+      <div class="fl-ns pl4-ns w-80-ns pt3 pt0-ns">
+        <div class="mb3-ns black-50">
           ETH reward
         </div>
-        <input class="mt3 w-100 bt-0 bl-0 br-0 b--black-20 f3 main-color" v-model="task.ethReward"/>
+        <input class="mt3-ns w-100-ns w-90 bt-0 bl-0 br-0 b--black-20 f3 main-color" v-model="task.ethReward"/>
       </div>
-      <div class="fl pl6 pt4 w-10-ns">
+      <div class="fl-ns pl6-ns pt4 w-10-ns">
         <img v-if="!isValidReward(task.ethReward)" src="static/assets/x.png" class="mw2"/>
         <img v-if="isValidReward(task.ethReward)" src="static/assets/checkmark.png" class="mw2-5"/>
       </div>
