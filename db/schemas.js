@@ -20,7 +20,8 @@ var OrganizationSchema = new Schema({
     repLastName: String,
     ethBalance: Number,
     ethAddress: String,
-    workers: [WorkerSchema]
+    workers: [WorkerSchema],
+    tasks: [JiraTaskSchema]
 });
 
 module.exports = {

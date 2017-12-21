@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import { mockLoggedInUser } from '../mocks/login'
 import { getDefaultInfoModalConfigObj } from '../util/modal'
 import routeNameMappings from '../router/route-name-mappings'
 
@@ -27,33 +26,19 @@ export default {
   },
   methods: {
     loginFb: function () {
-      // this.$http.get('/login').then((response) => {
-      //   if (mockLoginErrorResponse.error) {
-      //     this.modalConfigObject = {
-      //       title: 'Oops',
-      //       message: mockLoginErrorResponse.error,
-      //       theme: 'bg-danger-color',
-      //       onClose: () => {
-      //         self.showModal = false
-      //       }
-      //     }
-      //     this.showModal = true
-      //   }
-      // })
-      // if (mockLoginErrorResponse.data.error) {
-      //   const self = this
-      //   this.modalConfigObject = {
-      //     title: 'Oops',
-      //     message: mockLoginErrorResponse.data.error,
-      //     theme: 'bg-danger-color',
-      //     onClose: () => {
-      //       self.showModal = false
-      //     }
-      //   }
-      //   this.showModal = true
-      // }
-      this.$store.commit('setLoggedInUser', mockLoggedInUser.data)
-      this.$router.push(routeNameMappings.DepositEth)
+      return this.$http.get('/login/facebook')
+        .then((response) => {
+          return response.data.fbId
+        })
+        .then(fbId => {
+          return this.$http.post('/login/findUser', {
+            fbId
+          })
+        })
+        .then(response => {
+          this.$store.commit('setLoggedInUser', response.data)
+          this.$router.push(routeNameMappings.DepositEth)
+        })
     }
   }
 }

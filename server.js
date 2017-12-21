@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var serveStatic = require('serve-static');
 var secrets = require('./secrets')
 var models = require('./db/models');
+var mocks = require('./mocks/jira');
 
 mongoose.connect('mongodb://localhost:27017');
 mongoose.Promise = global.Promise;
@@ -50,6 +51,7 @@ passport.deserializeUser(function(obj, cb) {
 });
 
 var app = express();
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Initialize Passport and restore authentication state, if any, from the
@@ -58,10 +60,18 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(serveStatic(__dirname + "/dist"));
 
-app.get('/login', function (req, res) {
+app.get('/login/facebook', function (req, res) {
+  res.send({fbId: 'ulixir'});
+});
+
+app.post('/login/findUser', function (req, res) {
+  var fbId = req.body.fbId;
   var Organization = models.OrganizationModel;
-  Organization.findById(
-    '5a37376ec05d784f147bf0a1'
+
+  Organization.findOne(
+    {
+      fbId : fbId
+    }
   )
     .then(function(org) {
       res.send(org);
@@ -72,15 +82,23 @@ app.get('/login', function (req, res) {
     });
 });
 
-app.get('/login/facebook',
-  passport.authenticate('facebook')
-);
+app.get('/jira/tasks', function (req, res) {
+  res.send(mocks.mockTasksFromAPI);
+})
 
-app.get('/login/facebook/return',
-  passport.authenticate('facebook', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/');
-  }
-);
+app.get('/jira/members', function (req, res) {
+  res.send(mocks.mockMembersFromAPI);
+})
+
+// app.get('/login/facebook',
+//   passport.authenticate('facebook')
+// );
+//
+// app.get('/login/facebook/return',
+//   passport.authenticate('facebook', { failureRedirect: '/login' }),
+//   function(req, res) {
+//     res.redirect('/');
+//   }
+// );
 
 app.listen(8080);

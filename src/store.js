@@ -26,6 +26,8 @@ export const mutations = {
   setJiraMembers (state, members) {
     const membersFromAPI = members[0]
     const membersFromDB = members[1]
+    console.log(membersFromAPI)
+    console.log(membersFromDB)
     state.jiraMembers = addKeyToEachElement(membersFromAPI, membersFromDB, 'ethAddress')
     console.log('JIRA members set: ', state.jiraMembers)
   },

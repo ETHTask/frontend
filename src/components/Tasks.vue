@@ -38,7 +38,6 @@
 <script>
 import { isValidReward } from '../util/validation'
 import { getDefaultInfoModalConfigObj } from '../util/modal'
-import { mockTasksFromAPI, mockTasksFromDatabase } from '../mocks/jira'
 
 export default {
   name: 'Tasks',
@@ -105,7 +104,14 @@ export default {
       this.showModal = true
     },
     importTasks: function () {
-      this.$store.commit('setJiraTasks', [mockTasksFromAPI, mockTasksFromDatabase])
+      this.$http.get('/jira/tasks')
+        .then(response => {
+          return response.data
+        })
+        .then(tasksFromAPI => {
+          const tasksFromStore = this.$store.state.loggedInUser.tasks
+          this.$store.commit('setJiraTasks', [tasksFromAPI, tasksFromStore])
+        })
     }
   }
 }

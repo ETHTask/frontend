@@ -8,21 +8,33 @@
 </template>
 
 <script>
-import {
-  mockTasksFromAPI,
-  mockTasksFromDatabase,
-  mockMembersFromAPI,
-  mockMembersFromDatabase
-} from '../mocks/jira'
 import routeNameMappings from '../router/route-name-mappings'
 
 export default {
   name: 'Import',
   methods: {
     doImport: function () {
-      this.$store.commit('setJiraTasks', [mockTasksFromAPI, mockTasksFromDatabase])
-      this.$store.commit('setJiraMembers', [mockMembersFromAPI, mockMembersFromDatabase])
-      this.$router.push(routeNameMappings.TeamMembers)
+      this.$http.get('/jira/members')
+        .then(response => {
+          return response.data
+        })
+        .then(membersFromAPI => {
+          const membersFromStore = this.$store.state.loggedInUser.workers
+          this.$store.commit('setJiraMembers', [membersFromAPI, membersFromStore])
+        })
+        .then(() => {
+          return this.$http.get('/jira/tasks')
+        })
+        .then(response => {
+          return response.data
+        })
+        .then(tasksFromAPI => {
+          const tasksFromStore = this.$store.state.loggedInUser.tasks
+          this.$store.commit('setJiraTasks', [tasksFromAPI, tasksFromStore])
+        })
+        .then(() => {
+          this.$router.push(routeNameMappings.TeamMembers)
+        })
     }
   }
 }

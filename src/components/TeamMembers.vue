@@ -38,7 +38,6 @@
 <script>
 import { isValidAddress } from '../util/validation'
 import { getDefaultInfoModalConfigObj } from '../util/modal'
-import { mockMembersFromAPI, mockMembersFromDatabase } from '../mocks/jira'
 
 export default {
   name: 'TeamMembers',
@@ -85,7 +84,14 @@ export default {
       this.showModal = true
     },
     importTeam: function () {
-      this.$store.commit('setJiraMembers', [mockMembersFromAPI, mockMembersFromDatabase])
+      this.$http.get('/jira/members')
+        .then(response => {
+          return response.data
+        })
+        .then(membersFromAPI => {
+          const membersFromStore = this.$store.state.loggedInUser.workers
+          this.$store.commit('setJiraMembers', [membersFromAPI, membersFromStore])
+        })
     }
   }
 }

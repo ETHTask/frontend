@@ -10,12 +10,12 @@ export const mapTo = (dst, src, mapping) => {
 
 export const addKeyToEachElement = (tgt, dst, key) => {
   const idToKey = dst.reduce((acc, el) => {
-    acc[el.id] = el[key]
+    acc[el.jiraId] = el[key]
     return acc
   }, {})
 
   return tgt.map(el => {
-    el[key] = idToKey[el.id]
+    el[key] = idToKey[el.jiraId]
     return el
   })
 }
