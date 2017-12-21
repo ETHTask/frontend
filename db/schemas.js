@@ -1,31 +1,30 @@
 var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
-var JiraTaskSchema = new Schema({
-    jiraID: String,
-    reward: Number
+var TaskSchema = new Schema({
+    jiraId: String,
+    url: String,
+    reward: String
 });
 var WorkerSchema = new Schema({
-    jiraID: String,
-    firstName: String,
-    lastName: String,
-    ethAddress: String,
-    completedJiraTasks: [JiraTaskSchema]
+    jiraId: String,
+    imageUrl: String,
+    name: String,
+    ethAddress: String
 });
 var OrganizationSchema = new Schema({
     name: String,
-    logo: String,
     email: String,
-    repFirstName: String,
-    repLastName: String,
+    repName: String,
+    password: String,
     ethBalance: Number,
     ethAddress: String,
     workers: [WorkerSchema],
-    tasks: [JiraTaskSchema]
+    tasks: [TaskSchema]
 });
 
 module.exports = {
-  JiraTaskSchema,
+  TaskSchema,
   WorkerSchema,
   OrganizationSchema
 };

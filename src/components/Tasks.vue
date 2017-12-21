@@ -12,11 +12,11 @@
           <div class="mb3-ns black-50">
             ETH reward
           </div>
-          <input class="mt3-ns w-100-ns w-90 bt-0 bl-0 br-0 b--black-20 f3 main-color" v-model="task.ethReward"/>
+          <input class="mt3-ns w-100-ns w-90 bt-0 bl-0 br-0 b--black-20 f3 main-color" v-model="task.reward"/>
         </div>
         <div class="fl-ns pl6-ns pt4 w-10-ns">
-          <img v-if="!isValidReward(task.ethReward)" src="static/assets/x.png" class="mw2"/>
-          <img v-if="isValidReward(task.ethReward)" src="static/assets/checkmark.png" class="mw2-5"/>
+          <img v-if="!isValidReward(task.reward)" src="static/assets/x.png" class="mw2"/>
+          <img v-if="isValidReward(task.reward)" src="static/assets/checkmark.png" class="mw2-5"/>
         </div>
       </div>
       <div class="tc">
@@ -49,14 +49,14 @@ export default {
   },
   computed: {
     tasks: function () {
-      return this.$store.state.jiraTasks
+      return this.$store.state.loggedInUser.tasks
     },
     isFormValid: function () {
-      return this.tasks.every(task => isValidReward(task.ethReward))
+      return this.tasks.every(task => isValidReward(task.reward))
     },
     totalRewards: function () {
       return this.tasks.reduce((prev, curr) => {
-        return prev + +curr.ethReward
+        return prev + +curr.reward
       }, 0)
     }
   },
@@ -80,7 +80,7 @@ export default {
         return
       }
 
-      if (this.totalRewards > this.$store.state.loggedInUser.ethTaskBalance) {
+      if (this.totalRewards > this.$store.state.loggedInUser.ethBalance) {
         this.modalConfigObject = {
           title: modalTitle,
           message: 'Sorry, the total rewards you entered exceed your ETH balance! Lower the rewards or deposit more ETH :)',
@@ -93,15 +93,21 @@ export default {
         return
       }
 
-      this.modalConfigObject = {
-        title: 'Rewards set!',
-        message: 'Congratulations! You set your rewards. Now get stuff done :)',
-        theme: 'bg-main-color',
-        onClose: () => {
-          self.showModal = false
-        }
-      }
-      this.showModal = true
+      this.$http.post('/jira/tasks/update', {
+        password: 'abc',
+        tasks: this.tasks
+      })
+        .then(response => {
+          this.modalConfigObject = {
+            title: 'Addresses set!',
+            message: 'Congratulations! Your workforce is good to go :)',
+            theme: 'bg-main-color',
+            onClose: () => {
+              self.showModal = false
+            }
+          }
+          this.showModal = true
+        })
     },
     importTasks: function () {
       this.$http.get('/jira/tasks')
@@ -110,7 +116,7 @@ export default {
         })
         .then(tasksFromAPI => {
           const tasksFromStore = this.$store.state.loggedInUser.tasks
-          this.$store.commit('setJiraTasks', [tasksFromAPI, tasksFromStore])
+          this.$store.commit('setTasks', [tasksFromAPI, tasksFromStore])
         })
     }
   }

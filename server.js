@@ -1,9 +1,11 @@
 var express = require('express');
+var q = require('q');
 var passport = require('passport');
 var Strategy = require('passport-facebook').Strategy;
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var serveStatic = require('serve-static');
+
 var secrets = require('./secrets')
 var models = require('./db/models');
 var mocks = require('./mocks/jira');
@@ -13,7 +15,7 @@ mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.once('open', function() {
-  console.log("we're in")
+  console.log("Connected to Mongo");
 });
 
 
@@ -60,17 +62,31 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(serveStatic(__dirname + "/dist"));
 
-app.get('/login/facebook', function (req, res) {
-  res.send({fbId: 'ulixir'});
-});
+// var Organization = models.OrganizationModel;
+// var organization = new Organization({
+//   name: 'Ulixir',
+//   email: 'nikhil38@gmail.com',
+//   password: 'abc',
+//   repName: 'Nikhil Bhaskar',
+//   ethBalance: 100,
+//   ethAddress: '0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae',
+//   workers: [],
+//   tasks: []
+// });
+//
+// organization.save()
+//   .then(function(_org) {
+//     console.log(_org)
+//     return;
+//   })
 
 app.post('/login/findUser', function (req, res) {
-  var fbId = req.body.fbId;
+  var password = req.body.password;
   var Organization = models.OrganizationModel;
 
   Organization.findOne(
     {
-      fbId : fbId
+      password : password
     }
   )
     .then(function(org) {
@@ -84,21 +100,48 @@ app.post('/login/findUser', function (req, res) {
 
 app.get('/jira/tasks', function (req, res) {
   res.send(mocks.mockTasksFromAPI);
-})
+});
 
-app.get('/jira/members', function (req, res) {
-  res.send(mocks.mockMembersFromAPI);
-})
+app.get('/jira/workers', function (req, res) {
+  res.send(mocks.mockWorkersFromAPI);
+});
 
-// app.get('/login/facebook',
-//   passport.authenticate('facebook')
-// );
-//
-// app.get('/login/facebook/return',
-//   passport.authenticate('facebook', { failureRedirect: '/login' }),
-//   function(req, res) {
-//     res.redirect('/');
-//   }
-// );
+app.post('/jira/workers/update', function (req, res) {
+  var password = req.body.password;
+  var workers = req.body.workers;
+  var Organization = models.OrganizationModel;
+
+  return Organization.update(
+    { "password" : password },
+    { $set : {"workers" : workers} }
+  )
+    .then(function(org) {
+      res.send(org);
+      return;
+    })
+    .catch(function(err) {
+      res.send({error: err})
+    });
+});
+
+app.post('/jira/tasks/update', function (req, res) {
+  var password = req.body.password;
+  var tasks = req.body.tasks;
+  console.log(password)
+  console.log(tasks)
+  var Organization = models.OrganizationModel;
+
+  return Organization.update(
+    { "password" : password },
+    { $set : {"tasks" : tasks} }
+  )
+    .then(function(org) {
+      res.send(org);
+      return;
+    })
+    .catch(function(err) {
+      res.send({error: err})
+    });
+});
 
 app.listen(8080);

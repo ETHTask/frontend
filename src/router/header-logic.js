@@ -43,7 +43,7 @@ export const getDepositShowing = (path) => {
   return true
 }
 
-export const getMembersShowing = (path) => {
+export const getWorkersShowing = (path) => {
   if (path.includes(routeNameMappings.Login.path)) {
     return false
   }

@@ -13,7 +13,7 @@ import {
   getBalanceShowing,
   getDepositShowing,
   getTasksShowing,
-  getMembersShowing,
+  getWorkersShowing,
   getHamburgerShowing,
   getImportShowing
 } from './router/header-logic'
@@ -38,7 +38,7 @@ export default {
   methods: {
     onBalanceClick: function () {
       const self = this
-      const balance = this.$store.state.loggedInUser.ethTaskBalance
+      const balance = this.$store.state.loggedInUser.ethBalance
       this.infoModalConfigObject = {
         title: 'Your EthTask balance',
         message: `${balance} ETH`,
@@ -55,7 +55,7 @@ export default {
       this.navModalConfigObject = {
         onBalanceClick: this.onBalanceClick,
         onDepositClick: this.onDepositClick,
-        onMembersClick: this.onMembersClick,
+        onWorkersClick: this.onWorkersClick,
         onTasksClick: this.onTasksClick,
         onImportClick: this.onImportClick,
         onClose: () => {
@@ -67,7 +67,7 @@ export default {
     onDepositClick: function () {
       this.$router.push(routeNameMappings.DepositEth)
     },
-    onMembersClick: function () {
+    onWorkersClick: function () {
       this.$router.push(routeNameMappings.TeamMembers)
     },
     onTasksClick: function () {
@@ -82,12 +82,12 @@ export default {
     this.headerConfigObj.showBalance = getBalanceShowing(window.location.href)
     this.headerConfigObj.showDeposit = getDepositShowing(window.location.href)
     this.headerConfigObj.showTasks = getTasksShowing(window.location.href)
-    this.headerConfigObj.showMembers = getMembersShowing(window.location.href)
+    this.headerConfigObj.showWorkers = getWorkersShowing(window.location.href)
     this.headerConfigObj.showHamburger = getHamburgerShowing(window.location.href)
     this.headerConfigObj.showImport = getImportShowing(window.location.href)
     this.headerConfigObj.onBalanceClick = this.onBalanceClick
     this.headerConfigObj.onDepositClick = this.onDepositClick
-    this.headerConfigObj.onMembersClick = this.onMembersClick
+    this.headerConfigObj.onWorkersClick = this.onWorkersClick
     this.headerConfigObj.onTasksClick = this.onTasksClick
     this.headerConfigObj.onHamburgerClick = this.onHamburgerClick
     this.headerConfigObj.onImportClick = this.onImportClick
@@ -98,7 +98,7 @@ export default {
       this.headerConfigObj.showBalance = getBalanceShowing(newRoute.path)
       this.headerConfigObj.showDeposit = getDepositShowing(window.location.href)
       this.headerConfigObj.showTasks = getTasksShowing(window.location.href)
-      this.headerConfigObj.showMembers = getMembersShowing(window.location.href)
+      this.headerConfigObj.showWorkers = getWorkersShowing(window.location.href)
       this.headerConfigObj.showHamburger = getHamburgerShowing(window.location.href)
       this.headerConfigObj.showImport = getImportShowing(window.location.href)
     }

@@ -26,15 +26,9 @@ export default {
   },
   methods: {
     loginFb: function () {
-      return this.$http.get('/login/facebook')
-        .then((response) => {
-          return response.data.fbId
-        })
-        .then(fbId => {
-          return this.$http.post('/login/findUser', {
-            fbId
-          })
-        })
+      return this.$http.post('/login/findUser', {
+        password: 'abc'
+      })
         .then(response => {
           this.$store.commit('setLoggedInUser', response.data)
           this.$router.push(routeNameMappings.DepositEth)

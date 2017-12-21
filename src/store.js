@@ -1,8 +1,6 @@
-import { mapTo, addKeyToEachElement } from './util/object'
+import { mergeStoreAndAPIWorkers, mergeStoreAndAPITasks } from './util/object'
 
 export const state = {
-  jiraMembers: [],
-  jiraTasks: [],
   finishedTask: {
     hero: {
       imageUrl: 'static/assets/kate.png',
@@ -18,30 +16,26 @@ export const state = {
     ethTaskBalance: 0,
     repFirstName: '',
     repLastName: '',
-    workers: []
+    workers: [],
+    tasks: []
   }
 }
 
 export const mutations = {
-  setJiraMembers (state, members) {
-    const membersFromAPI = members[0]
-    const membersFromDB = members[1]
-    console.log(membersFromAPI)
-    console.log(membersFromDB)
-    state.jiraMembers = addKeyToEachElement(membersFromAPI, membersFromDB, 'ethAddress')
-    console.log('JIRA members set: ', state.jiraMembers)
+  setWorkers (state, workers) {
+    const workersFromAPI = workers[0]
+    const workersFromStore = workers[1]
+    state.loggedInUser.workers = mergeStoreAndAPIWorkers(workersFromAPI, workersFromStore)
+    console.log('JIRA members set: ', state.loggedInUser.workers)
   },
-  setJiraTasks (state, tasks) {
+  setTasks (state, tasks) {
     const tasksFromAPI = tasks[0]
-    const tasksFromDB = tasks[1]
-    state.jiraTasks = addKeyToEachElement(tasksFromAPI, tasksFromDB, 'ethReward')
-    console.log('JIRA tasks set: ', state.jiraTasks)
+    const tasksFromStore = tasks[1]
+    state.loggedInUser.tasks = mergeStoreAndAPITasks(tasksFromAPI, tasksFromStore)
+    console.log('JIRA tasks set: ', state.loggedInUser.tasks)
   },
   setLoggedInUser (state, user) {
-    state.loggedInUser = mapTo({}, user, {
-      'ethAddress': 'ethTaskAddress',
-      'ethBalance': 'ethTaskBalance'
-    })
+    state.loggedInUser = user
     console.log('Logged in user set: ', state.loggedInUser)
   }
 }

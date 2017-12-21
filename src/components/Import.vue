@@ -14,13 +14,13 @@ export default {
   name: 'Import',
   methods: {
     doImport: function () {
-      this.$http.get('/jira/members')
+      this.$http.get('/jira/workers')
         .then(response => {
           return response.data
         })
-        .then(membersFromAPI => {
-          const membersFromStore = this.$store.state.loggedInUser.workers
-          this.$store.commit('setJiraMembers', [membersFromAPI, membersFromStore])
+        .then(workersFromAPI => {
+          const workersFromStore = this.$store.state.loggedInUser.workers
+          this.$store.commit('setWorkers', [workersFromAPI, workersFromStore])
         })
         .then(() => {
           return this.$http.get('/jira/tasks')
@@ -30,7 +30,7 @@ export default {
         })
         .then(tasksFromAPI => {
           const tasksFromStore = this.$store.state.loggedInUser.tasks
-          this.$store.commit('setJiraTasks', [tasksFromAPI, tasksFromStore])
+          this.$store.commit('setTasks', [tasksFromAPI, tasksFromStore])
         })
         .then(() => {
           this.$router.push(routeNameMappings.TeamMembers)

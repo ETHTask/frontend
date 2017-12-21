@@ -11,7 +11,7 @@
       <div v-if="configObj.showDeposit" class="dtc w-10 tr white f5 hover-pointer" @click="configObj.onDepositClick()">
         Deposit
       </div>
-      <div v-if="configObj.showMembers" class="dtc w-10 tr white f5 hover-pointer" @click="configObj.onMembersClick()">
+      <div v-if="configObj.showWorkers" class="dtc w-10 tr white f5 hover-pointer" @click="configObj.onWorkersClick()">
         Members
       </div>
       <div v-if="configObj.showTasks" class="dtc w-10 tr white f5 hover-pointer" @click="configObj.onTasksClick()">

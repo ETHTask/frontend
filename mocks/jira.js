@@ -1,11 +1,11 @@
-var mockMembersFromAPI = [
+var mockWorkersFromAPI = [
   {
-    jiraId: '1122',
+    jiraId: '1',
     imageUrl: 'static/assets/ace.png',
     name: 'Ace O\'Neal'
   },
   {
-    jiraId: '1z48236ec15d784f147bf0aq',
+    jiraId: '2',
     imageUrl: 'static/assets/kate.png',
     name: 'Kate Coco'
   }
@@ -14,15 +14,15 @@ var mockMembersFromAPI = [
 var mockTasksFromAPI = [
   {
     url: '',
-    jiraId: '11'
+    jiraId: '1'
   },
   {
     url: '',
-    jiraId: '12'
+    jiraId: '1'
   }
 ];
 
 module.exports = {
-  mockMembersFromAPI: mockMembersFromAPI,
+  mockWorkersFromAPI: mockWorkersFromAPI,
   mockTasksFromAPI: mockTasksFromAPI
 }

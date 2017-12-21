@@ -17,7 +17,7 @@ export const getDefaultHeaderConfigObj = () => {
     showImport: false,
     onBalanceClick: () => {},
     onDepositClick: () => {},
-    onMembersClick: () => {},
+    onWorkersClick: () => {},
     onTasksClick: () => {},
     onHamburgerClick: () => {},
     onImportClick: () => {}

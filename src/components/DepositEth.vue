@@ -4,7 +4,7 @@
       Deposit ETH to the address below. This address is your EthTask Ethereum address, and will hold your balance.
     </div>
     <div id="ethAddress" class="main-color ba mt4 mw8 pa3 center br3 bw1 tl f1-ns f3 wb-bw">
-      {{ ethTaskAddress }}
+      {{ ethAddress }}
     </div>
     <div class="center tc pa3" @click="copyToClipboard()">
       <button class="pa3 bg-main-color br4 f3 hover-pointer">
@@ -23,8 +23,8 @@ export default {
     }
   },
   computed: {
-    ethTaskAddress: function () {
-      return this.$store.state.loggedInUser.ethTaskAddress
+    ethAddress: function () {
+      return this.$store.state.loggedInUser.ethAddress
     }
   },
   methods: {
