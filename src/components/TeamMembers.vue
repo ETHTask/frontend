@@ -47,9 +47,6 @@ export default {
       showModal: false
     }
   },
-  // created () {
-  //   this.importTeam()
-  // },
   computed: {
     workers: function () {
       return this.$store.state.loggedInUser.workers
