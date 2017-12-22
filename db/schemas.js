@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt');
 
 var Schema = mongoose.Schema;
 var TaskSchema = new Schema({
@@ -22,6 +23,17 @@ var OrganizationSchema = new Schema({
     ethAddress: String,
     workers: [WorkerSchema],
     tasks: [TaskSchema]
+});
+
+OrganizationSchema.pre('save', function (next) {
+  var org = this;
+  bcrypt.hash(org.password, 10, function (err, hash){
+    if (err) {
+      return next(err);
+    }
+    org.password = hash;
+    next();
+  })
 });
 
 module.exports = {
