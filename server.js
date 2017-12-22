@@ -62,23 +62,41 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(serveStatic(__dirname + "/dist"));
 
-// var Organization = models.OrganizationModel;
-// var organization = new Organization({
-//   name: 'Ulixir',
-//   email: 'nikhil38@gmail.com',
-//   password: 'abc',
-//   repName: 'Nikhil Bhaskar',
-//   ethBalance: 100,
-//   ethAddress: '0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae',
-//   workers: [],
-//   tasks: []
-// });
-//
-// organization.save()
-//   .then(function(_org) {
-//     console.log(_org)
-//     return;
-//   })
+app.post('/signUp', function (req, res) {
+  var Organization = models.OrganizationModel;
+
+  if (
+    req.body.companyName &&
+    req.body.firstName &&
+    req.body.lastName &&
+    req.body.email &&
+    req.body.password
+  ) {
+    var organization = new Organization({
+      name: req.body.companyName,
+      email: req.body.email,
+      password: req.body.password,
+      repFirstName: req.body.firstName,
+      repLastName: req.body.lastName,
+      ethBalance: 0,
+      ethAddress: '0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae',
+      workers: [],
+      tasks: []
+    });
+    organization.save()
+      .then(function(_org) {
+        console.log(_org)
+        res.send(_org);
+        return;
+      })
+      .catch(function(err) {
+        console.log(err)
+        res.send({error: err})
+      })
+  } else {
+    res.send({error: true})
+  }
+})
 
 app.post('/login/findUser', function (req, res) {
   var password = req.body.password;

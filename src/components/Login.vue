@@ -58,7 +58,7 @@
 
 <script>
 import { getDefaultInfoModalConfigObj } from '../util/modal'
-// import routeNameMappings from '../router/route-name-mappings'
+import routeNameMappings from '../router/route-name-mappings'
 import { isValidName, isValidPassword, isValidEmail, isValidCompanyName } from '../util/validation'
 
 export default {
@@ -103,7 +103,18 @@ export default {
           }
         }
         self.showModal = true
+        return
       }
+      this.$http.post('/signUp', {
+        companyName: this.companyName,
+        firstName: this.firstName,
+        lastName: this.lastName,
+        email: this.email,
+        password: this.password
+      }).then(response => {
+        this.$store.commit('setLoggedInUser', response.data)
+        this.$router.push(routeNameMappings.DepositEth)
+      })
     },
     login: function () {
       const self = this
