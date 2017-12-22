@@ -1,7 +1,7 @@
 <template>
-  <div class="pt6 bg-one ph3 vh-100">
-    <div class="center pb4 mw6 shadow-4 catamaran bg-white br3">
-      <div class="f3 pv3 br--top tc white br3 bg-main-color">Sign up to start using EthTask</div>
+  <div class="pt6 bg-bc ph3 vh-100">
+    <div class="center pb4 mw6 shadow-2 catamaran bg-white br3">
+      <div class="f3 pv4 br--top tc white br3 bg-main-color">Sign up to start using EthTask</div>
       <article class="pa4 ph5-l black-80">
         <fieldset class="ba b--transparent ph0 mh0">
           <legend class="ph0 mh0 fw6 clip">Sign Up</legend>
