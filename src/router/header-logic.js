@@ -23,6 +23,9 @@ export const getHamburgerShowing = (path) => {
   if (path.includes(routeNameMappings.Login.path)) {
     return false
   }
+  if (path.includes(routeNameMappings.SignUp.path)) {
+    return false
+  }
   return true
 }
 
@@ -30,11 +33,17 @@ export const getBalanceShowing = (path) => {
   if (path.includes(routeNameMappings.Login.path)) {
     return false
   }
+  if (path.includes(routeNameMappings.SignUp.path)) {
+    return false
+  }
   return true
 }
 
 export const getDepositShowing = (path) => {
   if (path.includes(routeNameMappings.Login.path)) {
+    return false
+  }
+  if (path.includes(routeNameMappings.SignUp.path)) {
     return false
   }
   if (path.includes(routeNameMappings.DepositEth.path)) {
@@ -47,6 +56,9 @@ export const getWorkersShowing = (path) => {
   if (path.includes(routeNameMappings.Login.path)) {
     return false
   }
+  if (path.includes(routeNameMappings.SignUp.path)) {
+    return false
+  }
   if (path.includes(routeNameMappings.TeamMembers.path)) {
     return false
   }
@@ -55,6 +67,9 @@ export const getWorkersShowing = (path) => {
 
 export const getTasksShowing = (path) => {
   if (path.includes(routeNameMappings.Login.path)) {
+    return false
+  }
+  if (path.includes(routeNameMappings.SignUp.path)) {
     return false
   }
   if (path.includes(routeNameMappings.Tasks.path)) {
@@ -67,6 +82,9 @@ export const getImportShowing = (path) => {
   if (path.includes(routeNameMappings.Login.path)) {
     return false
   }
+  if (path.includes(routeNameMappings.SignUp.path)) {
+    return false
+  }
   if (path.includes(routeNameMappings.Import.path)) {
     return false
   }
@@ -75,6 +93,9 @@ export const getImportShowing = (path) => {
 
 export const getLogoutShowing = (path) => {
   if (path.includes(routeNameMappings.Login.path)) {
+    return false
+  }
+  if (path.includes(routeNameMappings.SignUp.path)) {
     return false
   }
   return true

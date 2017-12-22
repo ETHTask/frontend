@@ -6,6 +6,7 @@ import Import from '@/components/Import'
 import TeamMembers from '@/components/TeamMembers'
 import Tasks from '@/components/Tasks'
 import Login from '@/components/Login'
+import SignUp from '@/components/SignUp'
 import Reward from '@/components/Reward'
 import routeNameMappings from './route-name-mappings'
 
@@ -42,6 +43,11 @@ export default new Router({
       path: routeNameMappings.Login.path,
       name: routeNameMappings.Login.name,
       component: Login
+    },
+    {
+      path: routeNameMappings.SignUp.path,
+      name: routeNameMappings.SignUp.name,
+      component: SignUp
     }
   ]
 })
