@@ -44,18 +44,34 @@ app.post('/signUp', function (req, res) {
       workers: [],
       tasks: []
     });
-    organization.save()
-      .then(function(_org) {
-        res.send(_org);
-        return;
+    Organization.findOne({ email: req.body.email })
+      .then(org => {
+        if (org && org._id) {
+          res.send({
+            error: true,
+            message: 'Sorry, that email already exists. Login or enter a new email',
+            status: 400
+          });
+          return false
+        }
+        return true
       })
-      .catch(function(err) {
-        console.log(err)
-        res.send({
-          error: true,
-          message: 'Sorry, there was error saving your information. Try again later!',
-          status: 400
-        });
+      .then(unique => {
+        if (unique) {
+          organization.save()
+            .then(function(_org) {
+              res.send(_org);
+              return;
+            })
+            .catch(function(err) {
+              console.log(err)
+              res.send({
+                error: true,
+                message: 'Sorry, there was error saving your information. Try again later!',
+                status: 400
+              });
+            })
+        }
       })
   } else {
     res.send({
