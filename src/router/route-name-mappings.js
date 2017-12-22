@@ -22,5 +22,9 @@ export default {
   Login: {
     name: 'Login',
     path: '/login'
+  },
+  SignUp: {
+    name: 'SignUp',
+    path: '/signup'
   }
 }

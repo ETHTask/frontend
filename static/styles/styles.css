@@ -67,6 +67,10 @@
   background-image: url('../assets/bg.jpg');
 }
 
+.bg-one {
+  background-image: url('../assets/bg-two.jpeg');
+}
+
 @media (max-width: 768px) {
    .hide-small {
       display: none;

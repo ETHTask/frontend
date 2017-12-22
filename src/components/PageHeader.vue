@@ -1,5 +1,5 @@
 <template>
-  <nav class="dt w-100 border-box ph3 pv3 pv3-ns ph4-m ph5-l center white bg-main-color shadow-4 catamaran">
+  <nav v-if="configObj.showBalance" class="dt w-100 border-box ph3 pv3 pv3-ns ph4-m ph5-l center white bg-main-color shadow-4 catamaran">
     <span
       class="dtc f3 catamaran b" :class="{tc:!configObj.showBalance}">
       {{ configObj.title }}
