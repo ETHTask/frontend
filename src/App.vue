@@ -15,7 +15,8 @@ import {
   getTasksShowing,
   getWorkersShowing,
   getHamburgerShowing,
-  getImportShowing
+  getImportShowing,
+  getLogoutShowing
 } from './router/header-logic'
 import routeNameMappings from './router/route-name-mappings'
 import {
@@ -58,6 +59,7 @@ export default {
         onWorkersClick: this.onWorkersClick,
         onTasksClick: this.onTasksClick,
         onImportClick: this.onImportClick,
+        onLogoutClick: this.onLogoutClick,
         onClose: () => {
           self.showNavModal = false
         }
@@ -75,6 +77,12 @@ export default {
     },
     onImportClick: function () {
       this.$router.push(routeNameMappings.Import)
+    },
+    onLogoutClick: function () {
+      this.$http.get('/logout')
+        .then(() => {
+          this.$router.push(routeNameMappings.Login)
+        })
     }
   },
   created () {
@@ -85,12 +93,14 @@ export default {
     this.headerConfigObj.showWorkers = getWorkersShowing(window.location.href)
     this.headerConfigObj.showHamburger = getHamburgerShowing(window.location.href)
     this.headerConfigObj.showImport = getImportShowing(window.location.href)
+    this.headerConfigObj.showLogout = getLogoutShowing(window.location.href)
     this.headerConfigObj.onBalanceClick = this.onBalanceClick
     this.headerConfigObj.onDepositClick = this.onDepositClick
     this.headerConfigObj.onWorkersClick = this.onWorkersClick
     this.headerConfigObj.onTasksClick = this.onTasksClick
     this.headerConfigObj.onHamburgerClick = this.onHamburgerClick
     this.headerConfigObj.onImportClick = this.onImportClick
+    this.headerConfigObj.onLogoutClick = this.onLogoutClick
   },
   watch: {
     '$route': function (newRoute, oldRoute) {
@@ -101,6 +111,7 @@ export default {
       this.headerConfigObj.showWorkers = getWorkersShowing(window.location.href)
       this.headerConfigObj.showHamburger = getHamburgerShowing(window.location.href)
       this.headerConfigObj.showImport = getImportShowing(window.location.href)
+      this.headerConfigObj.showLogout = getLogoutShowing(window.location.href)
     }
   }
 }

@@ -20,6 +20,9 @@
       <div v-if="configObj.showImport" class="dtc w-10 tr white f5 hover-pointer" @click="configObj.onImportClick()">
         Import
       </div>
+      <div v-if="configObj.showLogout" class="dtc w-10 tr white f5 hover-pointer" @click="configObj.onLogoutClick()">
+        Logout
+      </div>
     </div>
     <div v-if="configObj.showHamburger" class="show-small f3 hover-pointer" @click="configObj.onHamburgerClick()">
       &#9776;

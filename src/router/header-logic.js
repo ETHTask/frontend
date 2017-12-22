@@ -72,3 +72,10 @@ export const getImportShowing = (path) => {
   }
   return true
 }
+
+export const getLogoutShowing = (path) => {
+  if (path.includes(routeNameMappings.Login.path)) {
+    return false
+  }
+  return true
+}
