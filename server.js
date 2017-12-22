@@ -51,15 +51,42 @@ app.post('/signUp', function (req, res) {
       })
       .catch(function(err) {
         console.log(err)
-        res.send({error: err})
+        res.send({
+          error: true,
+          message: 'Sorry, there was error saving your information. Try again later!',
+          status: 400
+        });
       })
   } else {
-    res.send({error: true})
+    res.send({
+      error: true,
+      message: 'All fields are required',
+      status: 400
+    });
   }
 })
 
 app.post('/login', function (req, res) {
-
+  if (req.body.email && req.body.password) {
+    Organization.authenticate(req.body.email, req.body.password, function (error, org) {
+      if (error || !org) {
+        res.send({
+          error: true,
+          status: 401,
+          message: 'Sorry! You\'ve got the wrong email or password.'
+        });
+      } else {
+        req.session.userId = org._id;
+        return res.send(org);
+      }
+    });
+  } else {
+    res.send({
+      error: true,
+      status: 400,
+      message: 'All fields are required.'
+    });
+  }
 })
 
 app.get('/jira/tasks', function (req, res) {

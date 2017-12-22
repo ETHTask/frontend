@@ -103,8 +103,31 @@ export default {
         email: this.email,
         password: this.password
       }).then(response => {
-        this.$store.commit('setLoggedInUser', response.data)
-        this.$router.push(routeNameMappings.DepositEth)
+        if (response.data.error) {
+          this.modalConfigObject = {
+            title: 'Oops',
+            message: response.data.message,
+            theme: 'bg-danger-color',
+            onClose: () => {
+              self.showModal = false
+            }
+          }
+          self.showModal = true
+        } else {
+          this.$store.commit('setLoggedInUser', response.data)
+          this.$router.push(routeNameMappings.DepositEth)
+        }
+      })
+      .catch(() => {
+        this.modalConfigObject = {
+          title: 'Oops',
+          message: 'Sorry, the server is currently down. Try again later!',
+          theme: 'bg-danger-color',
+          onClose: () => {
+            self.showModal = false
+          }
+        }
+        self.showModal = true
       })
     },
     login: function () {
@@ -124,7 +147,38 @@ export default {
           }
         }
         self.showModal = true
+        return
       }
+      this.$http.post('/login', {
+        email: this.email,
+        password: this.password
+      }).then(response => {
+        if (response.data.error) {
+          this.modalConfigObject = {
+            title: 'Oops',
+            message: response.data.message,
+            theme: 'bg-danger-color',
+            onClose: () => {
+              self.showModal = false
+            }
+          }
+          self.showModal = true
+        } else {
+          this.$store.commit('setLoggedInUser', response.data)
+          this.$router.push(routeNameMappings.DepositEth)
+        }
+      })
+      .catch(() => {
+        this.modalConfigObject = {
+          title: 'Oops',
+          message: 'Sorry, the server is currently down. Try again later!',
+          theme: 'bg-danger-color',
+          onClose: () => {
+            self.showModal = false
+          }
+        }
+        self.showModal = true
+      })
     }
   }
 }
