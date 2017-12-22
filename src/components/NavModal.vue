@@ -7,6 +7,7 @@
         <div class="pa3 f3 hover-pointer" @click="configObj.onWorkersClick()">Members</div>
         <div class="pa3 f3 hover-pointer" @click="configObj.onTasksClick()">Tasks</div>
         <div class="pa3 f3 hover-pointer" @click="configObj.onImportClick()">Import</div>
+        <div class="pa3 f3 hover-pointer" @click="configObj.onLogoutClick()">Logout</div>
       </div>
     </div>
   </transition>
