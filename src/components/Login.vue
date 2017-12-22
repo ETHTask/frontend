@@ -10,12 +10,8 @@
             <input :class="{'b--dark-red': !isValidCompanyName(companyName)}" class="pa2 input-reset ba bg-transparent w-100 measure" type="email" name="company-name" v-model="companyName">
           </div>
           <div class="mt3">
-            <label class="db fw4 lh-copy f6" for="first-name">First name</label>
-            <input :class="{'b--dark-red': !isValidName(firstName)}" class="pa2 input-reset ba bg-transparent w-100 measure" type="email" name="first-name" v-model="firstName">
-          </div>
-          <div class="mt3">
-            <label class="db fw4 lh-copy f6" for="last-name">Last name</label>
-            <input :class="{'b--dark-red': !isValidName(lastName)}" class="pa2 input-reset ba bg-transparent w-100 measure" type="email" name="last-name" v-model="lastName">
+            <label class="db fw4 lh-copy f6" for="first-name">First name (optional)</label>
+            <input class="pa2 input-reset ba bg-transparent w-100 measure" type="email" name="first-name" v-model="firstName">
           </div>
           <div class="mt3">
             <label class="db fw4 lh-copy f6" for="email-address">Email address</label>
@@ -72,7 +68,6 @@ export default {
       isValidEmail,
       isValidCompanyName,
       firstName: null,
-      lastName: null,
       companyName: null,
       email: null,
       password: null,
@@ -83,13 +78,9 @@ export default {
     signUp: function () {
       const self = this
       if (
-        !this.isValidName(this.firstName) ||
-        !this.isValidName(this.lastName) ||
         !this.isValidCompanyName(this.companyName) ||
         !this.isValidEmail(this.email) ||
         !this.isValidPassword(this.password) ||
-        !this.firstName ||
-        !this.lastName ||
         !this.companyName ||
         !this.email ||
         !this.password
@@ -107,8 +98,8 @@ export default {
       }
       this.$http.post('/signUp', {
         companyName: this.companyName,
-        firstName: this.firstName,
-        lastName: this.lastName,
+        firstName: this.firstName || '',
+        lastName: '',
         email: this.email,
         password: this.password
       }).then(response => {

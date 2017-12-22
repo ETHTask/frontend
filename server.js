@@ -2,9 +2,10 @@ var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var serveStatic = require('serve-static');
+var session = require('express-session');
 
 var secrets = require('./secrets')
-var models = require('./db/models');
+var Organization = require('./db/models/organization');
 var mocks = require('./mocks/jira');
 
 mongoose.connect('mongodb://localhost:27017');
@@ -16,17 +17,19 @@ db.once('open', function() {
 });
 
 var app = express();
+//use sessions for tracking logins
+app.use(session({
+  secret: 'work hard',
+  resave: true,
+  saveUninitialized: false
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(serveStatic(__dirname + "/dist"));
 
 app.post('/signUp', function (req, res) {
-  var Organization = models.OrganizationModel;
-
   if (
     req.body.companyName &&
-    req.body.firstName &&
-    req.body.lastName &&
     req.body.email &&
     req.body.password
   ) {
@@ -55,23 +58,9 @@ app.post('/signUp', function (req, res) {
   }
 })
 
-app.post('/login/findUser', function (req, res) {
-  var password = req.body.password;
-  var Organization = models.OrganizationModel;
+app.post('/login', function (req, res) {
 
-  Organization.findOne(
-    {
-      password : password
-    }
-  )
-    .then(function(org) {
-      res.send(org);
-      return;
-    })
-    .catch(function(err) {
-      res.send({error: err})
-    });
-});
+})
 
 app.get('/jira/tasks', function (req, res) {
   res.send(mocks.mockTasksFromAPI);
@@ -84,7 +73,6 @@ app.get('/jira/workers', function (req, res) {
 app.post('/jira/workers/update', function (req, res) {
   var password = req.body.password;
   var workers = req.body.workers;
-  var Organization = models.OrganizationModel;
 
   return Organization.update(
     { "password" : password },
@@ -102,7 +90,6 @@ app.post('/jira/workers/update', function (req, res) {
 app.post('/jira/tasks/update', function (req, res) {
   var password = req.body.password;
   var tasks = req.body.tasks;
-  var Organization = models.OrganizationModel;
 
   return Organization.update(
     { "password" : password },
