@@ -6,10 +6,10 @@
     <div id="ethAddress" class="main-color ba mt4 mw8 pa3 center br3 bw1 tl f1-ns f3 wb-bw">
       {{ ethAddress }}
     </div>
-    <div class="center tc pa3" @click="copyToClipboard()">
-      <button class="pa3 bg-main-color br4 f3 hover-pointer">
-        <img src="static/assets/clipboard.png" class="mw3">
-      </button>
+    <div class="center tc pa3">
+      <!-- <button v-clipboard:copy="aa" class="pa3 white bg-main-color br3 f3 hover-pointer">
+        Copy
+      </button> -->
     </div>
   </div>
 </template>
@@ -25,23 +25,6 @@ export default {
   computed: {
     ethAddress: function () {
       return this.$store.state.loggedInUser.ethAddress
-    }
-  },
-  methods: {
-    copyToClipboard: function () {
-      if (document.selection) {
-        const range = document.body.createTextRange()
-        range.moveToElementText(document.getElementById('ethAddress'))
-        range.select().createTextRange()
-        document.execCommand('copy')
-        this.showToast = true
-      } else if (window.getSelection) {
-        const range = document.createRange()
-        range.selectNode(document.getElementById('ethAddress'))
-        window.getSelection().addRange(range)
-        document.execCommand('copy')
-        this.showToast = true
-      }
     }
   }
 }

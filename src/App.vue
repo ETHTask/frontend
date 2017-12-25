@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="bg-main-gray vh-100">
     <page-header :configObj="headerConfigObj"></page-header>
     <router-view/>
     <info-modal v-show="showInfoModal" :configObj="infoModalConfigObject"></info-modal>

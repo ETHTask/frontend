@@ -4,6 +4,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import VueClipboard from 'vue-clipboard'
 
 import App from './App'
 import router from './router'
@@ -16,6 +17,7 @@ Vue.config.productionTip = false
 
 Vue.use(Vuex)
 Vue.use(VueAxios, axios)
+Vue.use(VueClipboard)
 Vue.component('page-header', PageHeader)
 Vue.component('info-modal', InfoModal)
 Vue.component('nav-modal', NavModal)
