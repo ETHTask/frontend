@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-show="tasks.length" class="tl pa5-ns pa4 catamaran">
-      <div class="tc tl-ns ba pl3 pv3 mt4 b--black-10 shadow-4 cf" v-for="task in tasks">
+      <div class="tc tl-ns ba pl3 pv3 bg-white mt4 b--black-10 shadow-4 cf" v-for="task in tasks">
         <div class="fl-ns">
           <div class="mb3 black-50">
             Task ID: {{ task.id }}

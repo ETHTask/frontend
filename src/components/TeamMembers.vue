@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-show="workers.length" class="tl pa5-ns pa4 catamaran">
-      <div class="tc tl-ns ba pl3-ns pv3 mt4 b--black-10 shadow-4 cf" v-for="worker in workers">
+      <div class="tc tl-ns ba pl3-ns bg-white pv3 mt4 b--black-10 shadow-4 cf" v-for="worker in workers">
         <div class="fl-ns">
           <div class="mb3 black-50">
             {{ worker.name }}
