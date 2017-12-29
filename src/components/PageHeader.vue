@@ -11,14 +11,23 @@
       <div v-if="configObj.showDeposit" class="dtc w-10 tr white f5 hover-pointer" @click="configObj.onDepositClick()">
         Deposit
       </div>
-      <div v-if="configObj.showWorkers" class="dtc w-10 tr white f5 hover-pointer" @click="configObj.onWorkersClick()">
+      <div
+        v-if="configObj.showWorkers && selectedProject() && selectedProject().name"
+        class="dtc w-10 tr white f5 hover-pointer"
+        @click="configObj.onWorkersClick()">
         Members
       </div>
-      <div v-if="configObj.showTasks" class="dtc w-10 tr white f5 hover-pointer" @click="configObj.onTasksClick()">
-        Tasks
+      <div
+        v-if="configObj.showTasks && selectedProject() && selectedProject().name"
+        class="dtc w-10 tr white f6 hover-pointer"
+        @click="configObj.onTasksClick()">
+        {{ selectedProject().name }} Tasks
       </div>
-      <div v-if="configObj.showImport" class="dtc w-10 tr white f5 hover-pointer" @click="configObj.onImportClick()">
+      <!-- <div v-if="configObj.showImport" class="dtc w-10 tr white f5 hover-pointer" @click="configObj.onImportClick()">
         Import
+      </div> -->
+      <div v-if="configObj.showProjects" class="dtc w-10 tr white f5 hover-pointer" @click="configObj.onProjectsClick()">
+        Projects
       </div>
       <div v-if="configObj.showLogout" class="dtc w-10 tr white f5 hover-pointer" @click="configObj.onLogoutClick()">
         Logout
@@ -33,6 +42,12 @@
 <script>
 export default {
   name: 'PageHeader',
-  props: ['configObj']
+  props: ['configObj'],
+  methods: {
+    selectedProject: function () {
+      console.log(this.$store.state.loggedInUser.selectedProject)
+      return this.$store.state.loggedInUser.selectedProject
+    }
+  }
 }
 </script>

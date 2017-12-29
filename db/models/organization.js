@@ -11,15 +11,26 @@ var OrganizationSchema = new Schema({
     ethBalance: Number,
     ethAddress: String,
     workers: [new Schema({
-        jiraId: String,
-        url: String,
-        reward: String
+      trelloId: String,
+      imageUrl: String,
+      name: String,
+      ethAddress: String
     })],
-    tasks: [new Schema({
-        jiraId: String,
-        imageUrl: String,
+    projects: [
+      new Schema({
+        trelloId: String,
         name: String,
-        ethAddress: String
+        tasks: [new Schema({
+          trelloId: String,
+          url: String,
+          reward: String
+        })]
+      })
+    ],
+    tasks: [new Schema({
+      trelloId: String,
+      url: String,
+      reward: String
     })]
 });
 

@@ -6,7 +6,7 @@ var session = require('express-session');
 
 var secrets = require('./secrets')
 var Organization = require('./db/models/organization');
-var mocks = require('./mocks/jira');
+var mocks = require('./mocks/trello');
 
 mongoose.connect('mongodb://localhost:27017');
 mongoose.Promise = global.Promise;
@@ -39,7 +39,7 @@ app.post('/signUp', function (req, res) {
       password: req.body.password,
       repFirstName: req.body.firstName,
       repLastName: req.body.lastName,
-      ethBalance: 0,
+      ethBalance: 100,
       ethAddress: '0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae',
       workers: [],
       tasks: []
@@ -60,6 +60,7 @@ app.post('/signUp', function (req, res) {
         if (unique) {
           organization.save()
             .then(function(_org) {
+              req.session.userId = _org._id;
               res.send(_org);
               return;
             })
@@ -105,20 +106,24 @@ app.post('/login', function (req, res) {
   }
 })
 
-app.get('/jira/tasks', function (req, res) {
+app.get('/trello/projects', function (req, res) {
+  res.send(mocks.mockProjectsFromAPI);
+});
+
+app.get('/trello/tasks', function (req, res) {
   res.send(mocks.mockTasksFromAPI);
 });
 
-app.get('/jira/workers', function (req, res) {
+app.get('/trello/workers', function (req, res) {
   res.send(mocks.mockWorkersFromAPI);
 });
 
-app.post('/jira/workers/update', function (req, res) {
-  var password = req.body.password;
+app.post('/trello/workers/update', function (req, res) {
+  var id = req.session.userId;
   var workers = req.body.workers;
 
   return Organization.update(
-    { "password" : password },
+    { "_id" : id },
     { $set : {"workers" : workers} }
   )
     .then(function(org) {
@@ -130,13 +135,31 @@ app.post('/jira/workers/update', function (req, res) {
     });
 });
 
-app.post('/jira/tasks/update', function (req, res) {
-  var password = req.body.password;
+app.post('/trello/tasks/update', function (req, res) {
+  var id = req.session.userId;
+  var trelloId = req.body.projectId;
   var tasks = req.body.tasks;
 
   return Organization.update(
-    { "password" : password },
-    { $set : {"tasks" : tasks} }
+    { "_id" : id, "projects.trelloId": trelloId },
+    { $set : {"projects.$.tasks" : tasks} }
+  )
+    .then(function(org) {
+      res.send(org);
+      return;
+    })
+    .catch(function(err) {
+      res.send({error: err})
+    });
+});
+
+app.post('/trello/projects/update', function (req, res) {
+  var id = req.session.userId;
+  var projects = req.body.projects;
+
+  return Organization.update(
+    { "_id" : id },
+    { $set : {"projects" : projects} }
   )
     .then(function(org) {
       res.send(org);

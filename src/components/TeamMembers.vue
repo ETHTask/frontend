@@ -1,6 +1,16 @@
 <template>
   <div>
     <div v-show="workers.length" class="tl pa5-ns pa4 catamaran">
+      <article class="cf f3">
+        <div class="fl-ns bg-near-white tc mt2">
+          Sync your projects with Trello
+        </div>
+        <div class="fl-ns tc pa3 pa0-ns">
+          <button class="ml2-ns bg-main-color pa2 white br3 hover-pointer" @click="importWorkers()">
+            <i class="fa fa-refresh fa-lg" aria-hidden="true"></i>
+          </button>
+        </div>
+      </article>
       <div class="tc tl-ns ba pl3-ns bg-white pv3 mt4 b--black-10 shadow-4 cf" v-for="worker in workers">
         <div class="fl-ns">
           <div class="mb3 black-50">
@@ -27,7 +37,7 @@
       <info-modal v-show="showModal" :configObj="modalConfigObject"></info-modal>
     </div>
     <div v-show="!workers.length" class="tc catamaran">
-      <div class="f3 pa4">You have no team members to show. You can import team members from JIRA</div>
+      <div class="f3 pa4">You have no team members to show. You can import team members from Trello</div>
       <button class="bg-main-color pa3 white br4 f3 hover-pointer" @click="importWorkers()">
         <i class="fa fa-3x fa-arrow-circle-down" aria-hidden="true"></i>
       </button>
@@ -73,8 +83,7 @@ export default {
         return
       }
 
-      this.$http.post('/jira/workers/update', {
-        password: 'abc',
+      this.$http.post('/trello/workers/update', {
         workers: this.workers
       })
         .then(response => {
@@ -90,7 +99,7 @@ export default {
         })
     },
     importWorkers: function () {
-      this.$http.get('/jira/workers')
+      this.$http.get('/trello/workers')
         .then(response => {
           return response.data
         })

@@ -1,6 +1,16 @@
 <template>
   <div>
     <div v-show="tasks.length" class="tl pa5-ns pa4 catamaran">
+      <article class="cf f3">
+        <div class="fl-ns bg-near-white tc mt2">
+          Sync your projects with Trello
+        </div>
+        <div class="fl-ns tc pa3 pa0-ns">
+          <button class="ml2-ns bg-main-color pa2 white br3 hover-pointer" @click="importTasks()">
+            <i class="fa fa-refresh fa-lg" aria-hidden="true"></i>
+          </button>
+        </div>
+      </article>
       <div class="tc tl-ns ba pl3 pv3 bg-white mt4 b--black-10 shadow-4 cf" v-for="task in tasks">
         <div class="fl-ns">
           <div class="mb3 black-50">
@@ -27,7 +37,7 @@
       <info-modal v-show="showModal" :configObj="modalConfigObject"></info-modal>
     </div>
     <div v-show="!tasks.length" class="tc catamaran">
-      <div class="f3 pa4">You have no tasks to show. You can import tasks from JIRA</div>
+      <div class="f3 pa4">You have no tasks to show. You can import {{ selectedProject.name }} tasks from Trello</div>
       <button class="bg-main-color pa3 white br4 f3 hover-pointer" @click="importTasks()">
         <i class="fa fa-3x fa-arrow-circle-down" aria-hidden="true"></i>
       </button>
@@ -44,12 +54,13 @@ export default {
   data () {
     return {
       modalConfigObject: getDefaultInfoModalConfigObj(),
-      showModal: false
+      showModal: false,
+      selectedProject: this.$store.state.loggedInUser.selectedProject
     }
   },
   computed: {
     tasks: function () {
-      return this.$store.state.loggedInUser.tasks
+      return this.selectedProject.tasks
     },
     isFormValid: function () {
       return this.tasks.every(task => isValidReward(task.reward))
@@ -93,29 +104,41 @@ export default {
         return
       }
 
-      this.$http.post('/jira/tasks/update', {
-        password: 'abc',
+      this.$http.post('/trello/tasks/update', {
+        projectId: self.$store.state.loggedInUser.selectedProject.trelloId,
         tasks: this.tasks
       })
         .then(response => {
-          this.modalConfigObject = {
-            title: 'Addresses set!',
-            message: 'Congratulations! Your workforce is good to go :)',
-            theme: 'bg-main-color',
-            onClose: () => {
-              self.showModal = false
+          if (response.error) {
+            this.modalConfigObject = {
+              title: 'Oops',
+              message: 'There was an error processing your request. Try again later! :)',
+              theme: 'bg-danger-color',
+              onClose: () => {
+                self.showModal = false
+              }
             }
+            this.showModal = true
+          } else {
+            this.modalConfigObject = {
+              title: 'Addresses set!',
+              message: 'Congratulations! Your workforce is good to go :)',
+              theme: 'bg-main-color',
+              onClose: () => {
+                self.showModal = false
+              }
+            }
+            this.showModal = true
           }
-          this.showModal = true
         })
     },
     importTasks: function () {
-      this.$http.get('/jira/tasks')
+      this.$http.get('/trello/tasks')
         .then(response => {
           return response.data
         })
         .then(tasksFromAPI => {
-          const tasksFromStore = this.$store.state.loggedInUser.tasks
+          const tasksFromStore = this.selectedProject.tasks
           this.$store.commit('setTasks', [tasksFromAPI, tasksFromStore])
         })
     }

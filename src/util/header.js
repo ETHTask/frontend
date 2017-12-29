@@ -20,6 +20,7 @@ export const getDefaultHeaderConfigObj = () => {
     onWorkersClick: () => {},
     onTasksClick: () => {},
     onHamburgerClick: () => {},
-    onImportClick: () => {}
+    onImportClick: () => {},
+    onProjectsClick: () => {}
   }
 }

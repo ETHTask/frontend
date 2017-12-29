@@ -1,4 +1,8 @@
-import { mergeStoreAndAPIWorkers, mergeStoreAndAPITasks } from './util/object'
+import {
+  mergeStoreAndAPIWorkers,
+  mergeStoreAndAPITasks,
+  mergeStoreAndAPIProjects
+} from './util/object'
 
 export const state = {
   finishedTask: {
@@ -17,7 +21,12 @@ export const state = {
     repFirstName: '',
     repLastName: '',
     workers: [],
-    tasks: []
+    projects: [],
+    selectedProject: {
+      name: '',
+      id: '',
+      tasks: []
+    }
   }
 }
 
@@ -26,13 +35,23 @@ export const mutations = {
     const workersFromAPI = workers[0]
     const workersFromStore = workers[1]
     state.loggedInUser.workers = mergeStoreAndAPIWorkers(workersFromAPI, workersFromStore)
-    console.log('JIRA members set: ', state.loggedInUser.workers)
+    console.log('Trello members set: ', state.loggedInUser.workers)
+  },
+  setProjects (state, projects) {
+    const projectsFromAPI = projects[0]
+    const projectsFromStore = projects[1]
+    state.loggedInUser.projects = mergeStoreAndAPIProjects(projectsFromAPI, projectsFromStore)
+    console.log('Trello projects set: ', state.loggedInUser.projects)
   },
   setTasks (state, tasks) {
     const tasksFromAPI = tasks[0]
     const tasksFromStore = tasks[1]
-    state.loggedInUser.tasks = mergeStoreAndAPITasks(tasksFromAPI, tasksFromStore)
-    console.log('JIRA tasks set: ', state.loggedInUser.tasks)
+    state.loggedInUser.selectedProject.tasks = mergeStoreAndAPITasks(tasksFromAPI, tasksFromStore)
+    console.log('Trello tasks set: ', state.loggedInUser.selectedProject.tasks)
+  },
+  setSelectedProject (state, project) {
+    state.loggedInUser.selectedProject = project
+    console.log('Trello selected project set: ', state.loggedInUser.selectedProject)
   },
   setLoggedInUser (state, user) {
     state.loggedInUser = user

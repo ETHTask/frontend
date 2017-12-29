@@ -2,10 +2,13 @@ import routeNameMappings from './route-name-mappings'
 
 export const getTitle = (path) => {
   if (path.includes(routeNameMappings.Import.path)) {
-    return 'Import from JIRA'
+    return 'Import from Trello'
   }
   if (path.includes(routeNameMappings.TeamMembers.path)) {
     return 'Your team members'
+  }
+  if (path.includes(routeNameMappings.Projects.path)) {
+    return 'Your projects'
   }
   if (path.includes(routeNameMappings.Tasks.path)) {
     return 'Your open tasks'
@@ -47,6 +50,19 @@ export const getDepositShowing = (path) => {
     return false
   }
   if (path.includes(routeNameMappings.DepositEth.path)) {
+    return false
+  }
+  return true
+}
+
+export const getProjectsShowing = (path) => {
+  if (path.includes(routeNameMappings.Login.path)) {
+    return false
+  }
+  if (path.includes(routeNameMappings.SignUp.path)) {
+    return false
+  }
+  if (path.includes(routeNameMappings.Projects.path)) {
     return false
   }
   return true

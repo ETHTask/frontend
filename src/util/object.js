@@ -1,15 +1,15 @@
-import { createWorker, createTask } from './db/transform'
+import { createWorker, createTask, createProject } from './db/transform'
 
 export const mergeStoreAndAPIWorkers = (fromAPI, fromStore, configObj) => {
   const mergedList = [...fromStore]
 
   const idToEl = fromStore.reduce((acc, el) => {
-    acc[el.jiraId] = el
+    acc[el.trelloId] = el
     return acc
   }, {})
 
   fromAPI.forEach(el => {
-    if (!idToEl[el.jiraId]) {
+    if (!idToEl[el.trelloId]) {
       mergedList.push(createWorker(el))
     }
   })
@@ -21,13 +21,30 @@ export const mergeStoreAndAPITasks = (fromAPI, fromStore, configObj) => {
   const mergedList = [...fromStore]
 
   const idToEl = fromStore.reduce((acc, el) => {
-    acc[el.jiraId] = el
+    acc[el.trelloId] = el
     return acc
   }, {})
 
   fromAPI.forEach(el => {
-    if (!idToEl[el.jiraId]) {
+    if (!idToEl[el.trelloId]) {
       mergedList.push(createTask(el))
+    }
+  })
+
+  return mergedList
+}
+
+export const mergeStoreAndAPIProjects = (fromAPI, fromStore, configObj) => {
+  const mergedList = [...fromStore]
+
+  const idToEl = fromStore.reduce((acc, el) => {
+    acc[el.trelloId] = el
+    return acc
+  }, {})
+
+  fromAPI.forEach(el => {
+    if (!idToEl[el.trelloId]) {
+      mergedList.push(createProject(el))
     }
   })
 

@@ -15,6 +15,10 @@ export default {
     name: 'Tasks',
     path: '/tasks'
   },
+  Projects: {
+    name: 'Projects',
+    path: '/projects'
+  },
   Reward: {
     name: 'Reward',
     path: '/reward'

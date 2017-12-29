@@ -16,7 +16,8 @@ import {
   getWorkersShowing,
   getHamburgerShowing,
   getImportShowing,
-  getLogoutShowing
+  getLogoutShowing,
+  getProjectsShowing
 } from './router/header-logic'
 import routeNameMappings from './router/route-name-mappings'
 import {
@@ -60,6 +61,7 @@ export default {
         onTasksClick: this.onTasksClick,
         onImportClick: this.onImportClick,
         onLogoutClick: this.onLogoutClick,
+        onProjectsClick: this.onProjectsClick,
         onClose: () => {
           self.showNavModal = false
         }
@@ -83,6 +85,9 @@ export default {
         .then(() => {
           this.$router.push(routeNameMappings.Login)
         })
+    },
+    onProjectsClick: function () {
+      this.$router.push(routeNameMappings.Projects)
     }
   },
   created () {
@@ -94,6 +99,7 @@ export default {
     this.headerConfigObj.showHamburger = getHamburgerShowing(window.location.href)
     this.headerConfigObj.showImport = getImportShowing(window.location.href)
     this.headerConfigObj.showLogout = getLogoutShowing(window.location.href)
+    this.headerConfigObj.showProjects = getProjectsShowing(window.location.href)
     this.headerConfigObj.onBalanceClick = this.onBalanceClick
     this.headerConfigObj.onDepositClick = this.onDepositClick
     this.headerConfigObj.onWorkersClick = this.onWorkersClick
@@ -101,6 +107,7 @@ export default {
     this.headerConfigObj.onHamburgerClick = this.onHamburgerClick
     this.headerConfigObj.onImportClick = this.onImportClick
     this.headerConfigObj.onLogoutClick = this.onLogoutClick
+    this.headerConfigObj.onProjectsClick = this.onProjectsClick
   },
   watch: {
     '$route': function (newRoute, oldRoute) {
@@ -112,6 +119,7 @@ export default {
       this.headerConfigObj.showHamburger = getHamburgerShowing(window.location.href)
       this.headerConfigObj.showImport = getImportShowing(window.location.href)
       this.headerConfigObj.showLogout = getLogoutShowing(window.location.href)
+      this.headerConfigObj.showProjects = getProjectsShowing(window.location.href)
     }
   }
 }
