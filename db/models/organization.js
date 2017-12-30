@@ -10,12 +10,6 @@ var OrganizationSchema = new Schema({
     password: String,
     ethBalance: Number,
     ethAddress: String,
-    workers: [new Schema({
-      trelloId: String,
-      imageUrl: String,
-      name: String,
-      ethAddress: String
-    })],
     projects: [
       new Schema({
         trelloId: String,
@@ -23,15 +17,17 @@ var OrganizationSchema = new Schema({
         tasks: [new Schema({
           trelloId: String,
           url: String,
-          reward: String
+          reward: String,
+          name: String
+        })],
+        workers: [new Schema({
+          trelloId: String,
+          gravatarHash: String,
+          name: String,
+          ethAddress: String
         })]
       })
-    ],
-    tasks: [new Schema({
-      trelloId: String,
-      url: String,
-      reward: String
-    })]
+    ]
 });
 
 OrganizationSchema.pre('save', function (next) {

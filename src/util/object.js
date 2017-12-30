@@ -1,15 +1,16 @@
 import { createWorker, createTask, createProject } from './db/transform'
+import { idDSL } from './db/dsl'
 
 export const mergeStoreAndAPIWorkers = (fromAPI, fromStore, configObj) => {
   const mergedList = [...fromStore]
 
   const idToEl = fromStore.reduce((acc, el) => {
-    acc[el.trelloId] = el
+    acc[el[idDSL[1]]] = el
     return acc
   }, {})
 
   fromAPI.forEach(el => {
-    if (!idToEl[el.trelloId]) {
+    if (!idToEl[el[idDSL[0]]]) {
       mergedList.push(createWorker(el))
     }
   })
@@ -21,12 +22,12 @@ export const mergeStoreAndAPITasks = (fromAPI, fromStore, configObj) => {
   const mergedList = [...fromStore]
 
   const idToEl = fromStore.reduce((acc, el) => {
-    acc[el.trelloId] = el
+    acc[el[idDSL[1]]] = el
     return acc
   }, {})
 
   fromAPI.forEach(el => {
-    if (!idToEl[el.trelloId]) {
+    if (!idToEl[el[idDSL[0]]]) {
       mergedList.push(createTask(el))
     }
   })
@@ -38,12 +39,12 @@ export const mergeStoreAndAPIProjects = (fromAPI, fromStore, configObj) => {
   const mergedList = [...fromStore]
 
   const idToEl = fromStore.reduce((acc, el) => {
-    acc[el.trelloId] = el
+    acc[el[idDSL[1]]] = el
     return acc
   }, {})
 
   fromAPI.forEach(el => {
-    if (!idToEl[el.trelloId]) {
+    if (!idToEl[el[idDSL[0]]]) {
       mergedList.push(createProject(el))
     }
   })

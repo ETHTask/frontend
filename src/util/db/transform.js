@@ -1,36 +1,31 @@
+import {
+  projectDSL,
+  workerDSL,
+  taskDSL
+} from './dsl'
+
 export const createWorker = (worker) => {
-  const acceptableFields = {
-    id: 'trelloId',
-    imageUrl: 'imageUrl',
-    name: 'name'
-  }
   return Object.keys(worker).reduce((acc, field) => {
-    if (acceptableFields[field]) {
-      acc[acceptableFields[field]] = worker[field]
+    if (workerDSL[field]) {
+      acc[workerDSL[field]] = worker[field]
     }
     return acc
   }, {})
 }
 
 export const createProject = (project) => {
-  const acceptableFields = { id: 'trelloId', name: 'name' }
   return Object.keys(project).reduce((acc, field) => {
-    if (acceptableFields[field]) {
-      acc[acceptableFields[field]] = project[field]
+    if (projectDSL[field]) {
+      acc[projectDSL[field]] = project[field]
     }
     return acc
   }, {})
 }
 
 export const createTask = (task) => {
-  const acceptableFields = {
-    id: 'trelloId',
-    imageUrl: 'imageUrl',
-    name: 'name'
-  }
   return Object.keys(task).reduce((acc, field) => {
-    if (acceptableFields[field]) {
-      acc[acceptableFields[field]] = task[field]
+    if (taskDSL[field]) {
+      acc[taskDSL[field]] = task[field]
     }
     return acc
   }, {})
