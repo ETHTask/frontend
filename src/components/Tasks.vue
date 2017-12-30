@@ -3,7 +3,7 @@
     <div v-show="tasks.length" class="tl pa5-ns pa4 catamaran">
       <article class="cf f3">
         <div class="fl-ns bg-near-white tc mt2">
-          Sync your projects with Trello
+          Sync your tasks with Trello
         </div>
         <div class="fl-ns tc pa3 pa0-ns">
           <button class="ml2-ns bg-main-color pa2 white br3 hover-pointer" @click="importTasks()">
@@ -12,9 +12,9 @@
         </div>
       </article>
       <div class="tc tl-ns ba pl3 pv3 bg-white mt4 b--black-10 shadow-4 cf" v-for="task in tasks">
-        <div class="fl-ns">
+        <div class="fl-ns pointer" @click="viewTask(task)">
           <div class="mb3 black-50">
-            Task ID: {{ task.id }}
+            {{ task.name }}
           </div>
           <img src="static/assets/eye.png" class="mw3"/>
         </div>
@@ -73,6 +73,9 @@ export default {
   },
   methods: {
     isValidReward: isValidReward,
+    viewTask: function (task) {
+      window.open(task.url, '_blank')
+    },
     setRewards: function () {
       const self = this
       const modalTitle = 'Oops'
@@ -133,11 +136,15 @@ export default {
         })
     },
     importTasks: function () {
-      this.$http.get('/trello/tasks')
+      this.$http.post('/trello/tasks', {
+        projectId: this.selectedProject.trelloId,
+        token: this.$store.state.trelloToken
+      })
         .then(response => {
           return response.data
         })
         .then(tasksFromAPI => {
+          console.log(tasksFromAPI)
           const tasksFromStore = this.selectedProject.tasks
           this.$store.commit('setTasks', [tasksFromAPI, tasksFromStore])
         })

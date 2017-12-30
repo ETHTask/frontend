@@ -19,9 +19,9 @@
       </div>
       <div
         v-if="configObj.showTasks && selectedProject() && selectedProject().name"
-        class="dtc w-10 tr white f6 hover-pointer"
+        class="dtc w-10 tr white f5 hover-pointer"
         @click="configObj.onTasksClick()">
-        {{ selectedProject().name }} Tasks
+        Tasks
       </div>
       <!-- <div v-if="configObj.showImport" class="dtc w-10 tr white f5 hover-pointer" @click="configObj.onImportClick()">
         Import
@@ -45,7 +45,6 @@ export default {
   props: ['configObj'],
   methods: {
     selectedProject: function () {
-      console.log(this.$store.state.loggedInUser.selectedProject)
       return this.$store.state.loggedInUser.selectedProject
     }
   }

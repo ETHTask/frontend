@@ -3,7 +3,7 @@
     <div v-show="workers.length" class="tl pa5-ns pa4 catamaran">
       <article class="cf f3">
         <div class="fl-ns bg-near-white tc mt2">
-          Sync your projects with Trello
+          Sync your team with Trello
         </div>
         <div class="fl-ns tc pa3 pa0-ns">
           <button class="ml2-ns bg-main-color pa2 white br3 hover-pointer" @click="importWorkers()">
@@ -16,7 +16,7 @@
           <div class="mb3 black-50">
             {{ worker.name }}
           </div>
-          <img :src="worker.imageUrl" class="mw3"/>
+          <img :src="'http://www.gravatar.com/avatar/' + worker.gravatarHash + '.jpg'" class="mw3"/>
         </div>
         <div class="fl-ns pl4-ns w-80-ns pt3 pt0-ns">
           <div class="mb3-ns black-50">
@@ -59,7 +59,7 @@ export default {
   },
   computed: {
     workers: function () {
-      return this.$store.state.loggedInUser.workers
+      return this.$store.state.loggedInUser.selectedProject.workers
     },
     isFormValid: function () {
       return this.workers.every(worker => isValidAddress(worker.ethAddress))
@@ -84,7 +84,8 @@ export default {
       }
 
       this.$http.post('/trello/workers/update', {
-        workers: this.workers
+        workers: this.workers,
+        projectId: this.$store.state.loggedInUser.selectedProject.trelloId
       })
         .then(response => {
           this.modalConfigObject = {
@@ -99,12 +100,15 @@ export default {
         })
     },
     importWorkers: function () {
-      this.$http.get('/trello/workers')
+      this.$http.post('/trello/workers', {
+        projectId: this.$store.state.loggedInUser.selectedProject.trelloId,
+        token: this.$store.state.trelloToken
+      })
         .then(response => {
           return response.data
         })
         .then(workersFromAPI => {
-          const workersFromStore = this.$store.state.loggedInUser.workers
+          const workersFromStore = this.$store.state.loggedInUser.selectedProject.workers
           this.$store.commit('setWorkers', [workersFromAPI, workersFromStore])
         })
     }
