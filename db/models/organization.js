@@ -10,6 +10,13 @@ var OrganizationSchema = new Schema({
     password: String,
     ethBalance: Number,
     ethAddress: String,
+    teams: [
+      new Schema({
+        trelloName: String,
+        trelloId: String,
+        displayName: String
+      })
+    ],
     projects: [
       new Schema({
         trelloId: String,

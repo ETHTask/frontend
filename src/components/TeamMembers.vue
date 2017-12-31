@@ -102,6 +102,7 @@ export default {
     importWorkers: function () {
       this.$http.post('/trello/workers', {
         projectId: this.$store.state.loggedInUser.selectedProject.trelloId,
+        orgId: this.$store.state.loggedInUser.selectedTeam.trelloName,
         token: this.$store.state.trelloToken
       })
         .then(response => {

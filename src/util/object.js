@@ -1,4 +1,9 @@
-import { createWorker, createTask, createProject } from './db/transform'
+import {
+  createWorker,
+  createTask,
+  createProject,
+  createTeam
+} from './db/transform'
 import { idDSL } from './db/dsl'
 
 export const mergeStoreAndAPIWorkers = (fromAPI, fromStore, configObj) => {
@@ -29,6 +34,23 @@ export const mergeStoreAndAPITasks = (fromAPI, fromStore, configObj) => {
   fromAPI.forEach(el => {
     if (!idToEl[el[idDSL[0]]]) {
       mergedList.push(createTask(el))
+    }
+  })
+
+  return mergedList
+}
+
+export const mergeStoreAndAPITeams = (fromAPI, fromStore, configObj) => {
+  const mergedList = [...fromStore]
+
+  const idToEl = fromStore.reduce((acc, el) => {
+    acc[el[idDSL[1]]] = el
+    return acc
+  }, {})
+
+  fromAPI.forEach(el => {
+    if (!idToEl[el[idDSL[0]]]) {
+      mergedList.push(createTeam(el))
     }
   })
 

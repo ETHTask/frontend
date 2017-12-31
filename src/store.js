@@ -1,7 +1,8 @@
 import {
   mergeStoreAndAPIWorkers,
   mergeStoreAndAPITasks,
-  mergeStoreAndAPIProjects
+  mergeStoreAndAPIProjects,
+  mergeStoreAndAPITeams
 } from './util/object'
 
 export const state = {
@@ -22,9 +23,15 @@ export const state = {
     repFirstName: '',
     repLastName: '',
     projects: [],
+    teams: [],
+    selectedTeam: {
+      trelloId: '',
+      trelloName: '',
+      displayName: ''
+    },
     selectedProject: {
       name: '',
-      id: '',
+      trelloId: '',
       tasks: [],
       workers: []
     }
@@ -43,6 +50,12 @@ export const mutations = {
     const projectsFromStore = projects[1]
     state.loggedInUser.projects = mergeStoreAndAPIProjects(projectsFromAPI, projectsFromStore)
     console.log('Trello projects set: ', state.loggedInUser.projects)
+  },
+  setTeams (state, teams) {
+    const teamsFromAPI = teams[0]
+    const teamsFromStore = teams[1]
+    state.loggedInUser.teams = mergeStoreAndAPITeams(teamsFromAPI, teamsFromStore)
+    console.log('Trello teams set: ', state.loggedInUser.teams)
   },
   setToken (state, token) {
     state.trelloToken = token
@@ -63,6 +76,16 @@ export const mutations = {
       state.loggedInUser.selectedProject.workers = []
     }
     console.log('Trello selected project set: ', state.loggedInUser.selectedProject)
+  },
+  setSelectedTeam (state, team) {
+    state.loggedInUser.selectedTeam = team
+    state.loggedInUser.selectedProject = {
+      name: '',
+      trelloId: '',
+      tasks: [],
+      workers: []
+    }
+    console.log('Trello selected team set: ', state.loggedInUser.selectedTeam)
   },
   setLoggedInUser (state, user) {
     state.loggedInUser = user
