@@ -1,9 +1,6 @@
 import routeNameMappings from './route-name-mappings'
 
 export const getTitle = (path) => {
-  if (path.includes(routeNameMappings.Import.path)) {
-    return 'Import from Trello'
-  }
   if (path.includes(routeNameMappings.TeamMembers.path)) {
     return 'Your team members'
   }
@@ -89,19 +86,6 @@ export const getTasksShowing = (path) => {
     return false
   }
   if (path.includes(routeNameMappings.Tasks.path)) {
-    return false
-  }
-  return true
-}
-
-export const getImportShowing = (path) => {
-  if (path.includes(routeNameMappings.Login.path)) {
-    return false
-  }
-  if (path.includes(routeNameMappings.SignUp.path)) {
-    return false
-  }
-  if (path.includes(routeNameMappings.Import.path)) {
     return false
   }
   return true

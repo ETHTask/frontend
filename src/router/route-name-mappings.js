@@ -3,10 +3,6 @@ export default {
     name: 'DepositEth',
     path: '/deposit'
   },
-  Import: {
-    name: 'Import',
-    path: '/import'
-  },
   TeamMembers: {
     name: 'TeamMembers',
     path: '/team-members'

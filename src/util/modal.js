@@ -13,7 +13,6 @@ export const getDefaultNavModalConfigObj = () => {
     onDepositClick: () => {},
     onWorkers: () => {},
     onTasksClick: () => {},
-    onImportClick: () => {},
     onLogoutClick: () => {},
     onProjectsClick: () => {},
     onClose: () => {}

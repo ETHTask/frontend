@@ -23,9 +23,6 @@
         @click="configObj.onTasksClick()">
         Tasks
       </div>
-      <!-- <div v-if="configObj.showImport" class="dtc w-10 tr white f5 hover-pointer" @click="configObj.onImportClick()">
-        Import
-      </div> -->
       <div v-if="configObj.showProjects" class="dtc w-10 tr white f5 hover-pointer" @click="configObj.onProjectsClick()">
         Projects
       </div>
