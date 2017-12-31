@@ -5,6 +5,7 @@ import DepositEth from '@/components/DepositEth'
 import TeamMembers from '@/components/TeamMembers'
 import Tasks from '@/components/Tasks'
 import Projects from '@/components/Projects'
+import Teams from '@/components/Teams'
 import Login from '@/components/Login'
 import SignUp from '@/components/SignUp'
 import Reward from '@/components/Reward'
@@ -48,6 +49,11 @@ export default new Router({
       path: routeNameMappings.Projects.path,
       name: routeNameMappings.Projects.name,
       component: Projects
+    },
+    {
+      path: routeNameMappings.Teams.path,
+      name: routeNameMappings.Teams.name,
+      component: Teams
     }
   ]
 })

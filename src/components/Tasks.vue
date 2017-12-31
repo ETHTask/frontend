@@ -144,7 +144,6 @@ export default {
           return response.data
         })
         .then(tasksFromAPI => {
-          console.log(tasksFromAPI)
           const tasksFromStore = this.selectedProject.tasks
           this.$store.commit('setTasks', [tasksFromAPI, tasksFromStore])
         })

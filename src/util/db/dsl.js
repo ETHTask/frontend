@@ -6,6 +6,12 @@ export const projectDSL = {
   url: 'url'
 }
 
+export const teamDSL = {
+  id: 'trelloId',
+  displayName: 'displayName',
+  name: 'trelloName'
+}
+
 export const workerDSL = {
   id: 'trelloId',
   fullName: 'name',

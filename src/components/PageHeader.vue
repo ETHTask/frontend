@@ -11,6 +11,9 @@
       <div v-if="configObj.showDeposit" class="dtc w-10 tr white f5 hover-pointer" @click="configObj.onDepositClick()">
         Deposit
       </div>
+      <div v-if="configObj.showTeams" class="dtc w-10 tr white f5 hover-pointer" @click="configObj.onTeamsClick()">
+        My teams
+      </div>
       <div
         v-if="configObj.showWorkers && selectedProject() && selectedProject().name"
         class="dtc w-10 tr white f5 hover-pointer"
@@ -23,7 +26,10 @@
         @click="configObj.onTasksClick()">
         Tasks
       </div>
-      <div v-if="configObj.showProjects" class="dtc w-10 tr white f5 hover-pointer" @click="configObj.onProjectsClick()">
+      <div
+        v-if="configObj.showProjects && selectedTeam() && selectedTeam().trelloId"
+        class="dtc w-10 tr white f5 hover-pointer"
+        @click="configObj.onProjectsClick()">
         Projects
       </div>
       <div v-if="configObj.showLogout" class="dtc w-10 tr white f5 hover-pointer" @click="configObj.onLogoutClick()">
@@ -43,6 +49,9 @@ export default {
   methods: {
     selectedProject: function () {
       return this.$store.state.loggedInUser.selectedProject
+    },
+    selectedTeam: function () {
+      return this.$store.state.loggedInUser.selectedTeam
     }
   }
 }

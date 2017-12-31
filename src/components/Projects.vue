@@ -6,7 +6,7 @@
           Sync your projects with Trello
         </div>
         <div class="fl-ns tc pa3 pa0-ns">
-          <button class="ml2-ns bg-main-color pa2 white br3 hover-pointer" @click="login()">
+          <button class="ml2-ns bg-main-color pa2 white br3 hover-pointer" @click="importProjects()">
             <i class="fa fa-refresh fa-lg" aria-hidden="true"></i>
           </button>
         </div>
@@ -33,7 +33,7 @@
     </section>
     <div v-show="!projects.length" class="tc catamaran">
       <div class="f3 pa4">You have no projects to show. You can import projects from Trello</div>
-      <button class="bg-main-color pa3 white br4 f3 hover-pointer" @click="login()">
+      <button class="bg-main-color pa3 white br4 f3 hover-pointer" @click="importProjects()">
         <i class="fa fa-3x fa-arrow-circle-down" aria-hidden="true"></i>
       </button>
     </div>
@@ -51,38 +51,20 @@ export default {
       rc
     }
   },
-  created () {
-    this.login()
-  },
   computed: {
     projects: function () {
       return this.$store.state.loggedInUser.projects
     }
   },
   methods: {
-    login: function () {
-      const self = this
-      window.Trello.authorize({
-        type: 'popup',
-        name: 'EthTask',
-        scope: {
-          read: 'true',
-          write: 'true'
-        },
-        expiration: 'never',
-        success: function () {
-          self.importProjects()
-        },
-        error: self.showErrorModal
-      })
-    },
     viewProject: function (project) {
       window.open(project.url, '_blank')
     },
     importProjects: function () {
       this.$store.commit('setToken', window.Trello.token())
       this.$http.post('/trello/projects', {
-        token: window.Trello.token()
+        token: this.$store.state.trelloToken,
+        teamId: this.$store.state.loggedInUser.selectedTeam.trelloName
       })
         .then(response => {
           return response.data

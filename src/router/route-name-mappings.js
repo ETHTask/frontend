@@ -15,6 +15,10 @@ export default {
     name: 'Projects',
     path: '/projects'
   },
+  Teams: {
+    name: 'Teams',
+    path: '/teams'
+  },
   Reward: {
     name: 'Reward',
     path: '/reward'

@@ -29,7 +29,7 @@ function trelloWorkersGET (req, res) {
   var GET_WORKERS_S = trelloEndpoints.GET_WORKERS_S;
   var GET_WORKER = trelloEndpoints.GET_WORKER;
 
-  var workersEndpoint = `${GET_WORKERS_P + 'ateam38458566' + GET_WORKERS_S}?key=${trelloKey}&token=${token}`;
+  var workersEndpoint = `${GET_WORKERS_P + orgId + GET_WORKERS_S}?key=${trelloKey}&token=${token}`;
   axios.get(workersEndpoint)
     .then(function(workers) {
       return workers.data;
@@ -107,7 +107,7 @@ function trelloProjectsPUT (req, res) {
 
 function trelloProjectsGET (req, res) {
   var token = req.body.token;
-  var teamId = req.body.teamId || 'ateam38458566';
+  var teamId = req.body.teamId;
   var GET_PROJECTS_P = trelloEndpoints.GET_PROJECTS_P;
   var GET_PROJECTS_S = trelloEndpoints.GET_PROJECTS_S;
 
@@ -121,11 +121,26 @@ function trelloProjectsGET (req, res) {
     });
 }
 
+function trelloTeamsGET (req, res) {
+  var token = req.body.token;
+  var GET_TEAMS = trelloEndpoints.GET_TEAMS;
+
+  var endpoint = `${GET_TEAMS}?key=${trelloKey}&token=${token}`;
+  axios.get(endpoint)
+    .then(function(teams) {
+      res.send(teams.data)
+    })
+    .catch(function(err) {
+      res.send({error: err})
+    });
+}
+
 module.exports = {
   trelloProjectsGET: trelloProjectsGET,
   trelloProjectsPUT: trelloProjectsPUT,
   trelloTasksPUT: trelloTasksPUT,
   trelloWorkersPUT: trelloWorkersPUT,
   trelloWorkersGET: trelloWorkersGET,
-  trelloTasksGET: trelloTasksGET
+  trelloTasksGET: trelloTasksGET,
+  trelloTeamsGET: trelloTeamsGET
 };

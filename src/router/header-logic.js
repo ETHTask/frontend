@@ -7,6 +7,9 @@ export const getTitle = (path) => {
   if (path.includes(routeNameMappings.Projects.path)) {
     return 'Your projects'
   }
+  if (path.includes(routeNameMappings.Teams.path)) {
+    return 'Your teams'
+  }
   if (path.includes(routeNameMappings.Tasks.path)) {
     return 'Your open tasks'
   }
@@ -60,6 +63,19 @@ export const getProjectsShowing = (path) => {
     return false
   }
   if (path.includes(routeNameMappings.Projects.path)) {
+    return false
+  }
+  return true
+}
+
+export const getTeamsShowing = (path) => {
+  if (path.includes(routeNameMappings.Login.path)) {
+    return false
+  }
+  if (path.includes(routeNameMappings.SignUp.path)) {
+    return false
+  }
+  if (path.includes(routeNameMappings.Teams.path)) {
     return false
   }
   return true

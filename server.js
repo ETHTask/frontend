@@ -29,6 +29,7 @@ app.post('/trello/workers', trelloC.trelloWorkersGET);
 app.post('/trello/workers/update', trelloC.trelloWorkersPUT);
 app.post('/trello/tasks/update', trelloC.trelloTasksPUT);
 app.post('/trello/projects/update', trelloC.trelloProjectsPUT);
+app.post('/trello/teams', trelloC.trelloTeamsGET);
 app.get('/logout', logout);
 
 app.listen(8080);

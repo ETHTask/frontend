@@ -16,7 +16,8 @@ import {
   getWorkersShowing,
   getHamburgerShowing,
   getLogoutShowing,
-  getProjectsShowing
+  getProjectsShowing,
+  getTeamsShowing
 } from './router/header-logic'
 import routeNameMappings from './router/route-name-mappings'
 import {
@@ -60,6 +61,7 @@ export default {
         onTasksClick: this.onTasksClick,
         onLogoutClick: this.onLogoutClick,
         onProjectsClick: this.onProjectsClick,
+        onTeamsClick: this.onTeamsClick,
         onClose: () => {
           self.showNavModal = false
         }
@@ -74,6 +76,9 @@ export default {
     },
     onTasksClick: function () {
       this.$router.push(routeNameMappings.Tasks)
+    },
+    onTeamsClick: function () {
+      this.$router.push(routeNameMappings.Teams)
     },
     onLogoutClick: function () {
       this.$http.get('/logout')
@@ -94,14 +99,15 @@ export default {
     this.headerConfigObj.showHamburger = getHamburgerShowing(window.location.href)
     this.headerConfigObj.showLogout = getLogoutShowing(window.location.href)
     this.headerConfigObj.showProjects = getProjectsShowing(window.location.href)
+    this.headerConfigObj.showTeams = getTeamsShowing(window.location.href)
     this.headerConfigObj.onBalanceClick = this.onBalanceClick
     this.headerConfigObj.onDepositClick = this.onDepositClick
     this.headerConfigObj.onWorkersClick = this.onWorkersClick
     this.headerConfigObj.onTasksClick = this.onTasksClick
     this.headerConfigObj.onHamburgerClick = this.onHamburgerClick
-    this.headerConfigObj.onImportClick = this.onImportClick
     this.headerConfigObj.onLogoutClick = this.onLogoutClick
     this.headerConfigObj.onProjectsClick = this.onProjectsClick
+    this.headerConfigObj.onTeamsClick = this.onTeamsClick
   },
   watch: {
     '$route': function (newRoute, oldRoute) {
@@ -113,6 +119,7 @@ export default {
       this.headerConfigObj.showHamburger = getHamburgerShowing(window.location.href)
       this.headerConfigObj.showLogout = getLogoutShowing(window.location.href)
       this.headerConfigObj.showProjects = getProjectsShowing(window.location.href)
+      this.headerConfigObj.showTeams = getTeamsShowing(window.location.href)
     }
   }
 }
