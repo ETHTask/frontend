@@ -15,7 +15,6 @@ import {
   getTasksShowing,
   getWorkersShowing,
   getHamburgerShowing,
-  getImportShowing,
   getLogoutShowing,
   getProjectsShowing
 } from './router/header-logic'
@@ -59,7 +58,6 @@ export default {
         onDepositClick: this.onDepositClick,
         onWorkersClick: this.onWorkersClick,
         onTasksClick: this.onTasksClick,
-        onImportClick: this.onImportClick,
         onLogoutClick: this.onLogoutClick,
         onProjectsClick: this.onProjectsClick,
         onClose: () => {
@@ -76,9 +74,6 @@ export default {
     },
     onTasksClick: function () {
       this.$router.push(routeNameMappings.Tasks)
-    },
-    onImportClick: function () {
-      this.$router.push(routeNameMappings.Import)
     },
     onLogoutClick: function () {
       this.$http.get('/logout')
@@ -97,7 +92,6 @@ export default {
     this.headerConfigObj.showTasks = getTasksShowing(window.location.href)
     this.headerConfigObj.showWorkers = getWorkersShowing(window.location.href)
     this.headerConfigObj.showHamburger = getHamburgerShowing(window.location.href)
-    this.headerConfigObj.showImport = getImportShowing(window.location.href)
     this.headerConfigObj.showLogout = getLogoutShowing(window.location.href)
     this.headerConfigObj.showProjects = getProjectsShowing(window.location.href)
     this.headerConfigObj.onBalanceClick = this.onBalanceClick
@@ -117,7 +111,6 @@ export default {
       this.headerConfigObj.showTasks = getTasksShowing(window.location.href)
       this.headerConfigObj.showWorkers = getWorkersShowing(window.location.href)
       this.headerConfigObj.showHamburger = getHamburgerShowing(window.location.href)
-      this.headerConfigObj.showImport = getImportShowing(window.location.href)
       this.headerConfigObj.showLogout = getLogoutShowing(window.location.href)
       this.headerConfigObj.showProjects = getProjectsShowing(window.location.href)
     }
