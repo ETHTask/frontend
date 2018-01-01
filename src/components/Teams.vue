@@ -20,10 +20,10 @@
               class="w2 h2 w3-ns h3-ns br-100"
               :style="{ backgroundColor: rc.randomColor() }">
             </div>
-            <div class="pl3 flex-auto">
-              <span class="f6 db black-70">{{ team.displayName }}</span>
+            <div class="pl3 flex-auto f6 db black-70">
+              {{ team.displayName }} <span v-if="!unselected(team)">(selected)</span>
             </div>
-            <div>
+            <div v-if="unselected(team)">
               <button class="bg-main-color pa2 white br3 f5 hover-pointer" @click="selectTeam(team, $event)">
                 Select
               </button>
@@ -78,6 +78,9 @@ export default {
     },
     viewProject: function (project) {
       window.open(project.url, '_blank')
+    },
+    unselected: function (team) {
+      return this.$store.state.selectedTeam.trelloId !== team.trelloId
     },
     importTeams: function () {
       this.$store.commit('setToken', window.Trello.token())

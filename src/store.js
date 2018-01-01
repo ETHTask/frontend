@@ -6,6 +6,7 @@ import {
 } from './util/object'
 
 export const state = {
+  loggedIn: false,
   finishedTask: {
     hero: {
       imageUrl: 'static/assets/kate.png',
@@ -14,6 +15,17 @@ export const state = {
     id: '12'
   },
   trelloToken: '',
+  selectedTeam: {
+    trelloId: '',
+    trelloName: '',
+    displayName: ''
+  },
+  selectedProject: {
+    name: '',
+    trelloId: '',
+    tasks: [],
+    workers: []
+  },
   loggedInUser: {
     name: '',
     logo: '',
@@ -23,18 +35,7 @@ export const state = {
     repFirstName: '',
     repLastName: '',
     projects: [],
-    teams: [],
-    selectedTeam: {
-      trelloId: '',
-      trelloName: '',
-      displayName: ''
-    },
-    selectedProject: {
-      name: '',
-      trelloId: '',
-      tasks: [],
-      workers: []
-    }
+    teams: []
   }
 }
 
@@ -42,8 +43,8 @@ export const mutations = {
   setWorkers (state, workers) {
     const workersFromAPI = workers[0]
     const workersFromStore = workers[1]
-    state.loggedInUser.selectedProject.workers = mergeStoreAndAPIWorkers(workersFromAPI, workersFromStore)
-    console.log('Trello members set: ', state.loggedInUser.selectedProject.workers)
+    state.selectedProject.workers = mergeStoreAndAPIWorkers(workersFromAPI, workersFromStore)
+    console.log('Trello members set: ', state.selectedProject.workers)
   },
   setProjects (state, projects) {
     const projectsFromAPI = projects[0]
@@ -64,31 +65,35 @@ export const mutations = {
   setTasks (state, tasks) {
     const tasksFromAPI = tasks[0]
     const tasksFromStore = tasks[1]
-    state.loggedInUser.selectedProject.tasks = mergeStoreAndAPITasks(tasksFromAPI, tasksFromStore)
-    console.log('Trello tasks set: ', state.loggedInUser.selectedProject.tasks)
+    state.selectedProject.tasks = mergeStoreAndAPITasks(tasksFromAPI, tasksFromStore)
+    console.log('Trello tasks set: ', state.selectedProject.tasks)
   },
   setSelectedProject (state, project) {
-    state.loggedInUser.selectedProject = project
+    state.selectedProject = project
     if (!project.tasks) {
-      state.loggedInUser.selectedProject.tasks = []
+      state.selectedProject.tasks = []
     }
     if (!project.workers) {
-      state.loggedInUser.selectedProject.workers = []
+      state.selectedProject.workers = []
     }
-    console.log('Trello selected project set: ', state.loggedInUser.selectedProject)
+    console.log('Trello selected project set: ', state.selectedProject)
   },
   setSelectedTeam (state, team) {
-    state.loggedInUser.selectedTeam = team
-    state.loggedInUser.selectedProject = {
+    state.selectedTeam = team
+    state.selectedProject = {
       name: '',
       trelloId: '',
       tasks: [],
       workers: []
     }
-    console.log('Trello selected team set: ', state.loggedInUser.selectedTeam)
+    console.log('Trello selected team set: ', state.selectedTeam)
   },
   setLoggedInUser (state, user) {
     state.loggedInUser = user
     console.log('Logged in user set: ', state.loggedInUser)
+  },
+  setLoggedIn (state, loggedIn) {
+    state.loggedIn = loggedIn
+    console.log('Logged in state set: ', state.loggedIn)
   }
 }

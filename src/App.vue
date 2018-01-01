@@ -1,6 +1,7 @@
 <template>
   <div id="app" class="bg-main-gray vh-100">
     <page-header :configObj="headerConfigObj"></page-header>
+    <dash></dash>
     <router-view/>
     <info-modal v-show="showInfoModal" :configObj="infoModalConfigObject"></info-modal>
     <nav-modal v-show="showNavModal" :configObj="navModalConfigObject"></nav-modal>
@@ -10,14 +11,11 @@
 <script>
 import {
   getTitle,
-  getBalanceShowing,
   getDepositShowing,
   getTasksShowing,
   getWorkersShowing,
   getHamburgerShowing,
-  getLogoutShowing,
-  getProjectsShowing,
-  getTeamsShowing
+  getLogoutShowing
 } from './router/header-logic'
 import routeNameMappings from './router/route-name-mappings'
 import {
@@ -83,6 +81,7 @@ export default {
     onLogoutClick: function () {
       this.$http.get('/logout')
         .then(() => {
+          this.$store.commit('setLoggedIn', false)
           this.$router.push(routeNameMappings.Login)
         })
     },
@@ -92,34 +91,25 @@ export default {
   },
   created () {
     this.headerConfigObj.title = getTitle(window.location.href)
-    this.headerConfigObj.showBalance = getBalanceShowing(window.location.href)
     this.headerConfigObj.showDeposit = getDepositShowing(window.location.href)
     this.headerConfigObj.showTasks = getTasksShowing(window.location.href)
     this.headerConfigObj.showWorkers = getWorkersShowing(window.location.href)
     this.headerConfigObj.showHamburger = getHamburgerShowing(window.location.href)
     this.headerConfigObj.showLogout = getLogoutShowing(window.location.href)
-    this.headerConfigObj.showProjects = getProjectsShowing(window.location.href)
-    this.headerConfigObj.showTeams = getTeamsShowing(window.location.href)
-    this.headerConfigObj.onBalanceClick = this.onBalanceClick
     this.headerConfigObj.onDepositClick = this.onDepositClick
     this.headerConfigObj.onWorkersClick = this.onWorkersClick
     this.headerConfigObj.onTasksClick = this.onTasksClick
     this.headerConfigObj.onHamburgerClick = this.onHamburgerClick
     this.headerConfigObj.onLogoutClick = this.onLogoutClick
-    this.headerConfigObj.onProjectsClick = this.onProjectsClick
-    this.headerConfigObj.onTeamsClick = this.onTeamsClick
   },
   watch: {
     '$route': function (newRoute, oldRoute) {
       this.headerConfigObj.title = getTitle(newRoute.path)
-      this.headerConfigObj.showBalance = getBalanceShowing(newRoute.path)
       this.headerConfigObj.showDeposit = getDepositShowing(window.location.href)
       this.headerConfigObj.showTasks = getTasksShowing(window.location.href)
       this.headerConfigObj.showWorkers = getWorkersShowing(window.location.href)
       this.headerConfigObj.showHamburger = getHamburgerShowing(window.location.href)
       this.headerConfigObj.showLogout = getLogoutShowing(window.location.href)
-      this.headerConfigObj.showProjects = getProjectsShowing(window.location.href)
-      this.headerConfigObj.showTeams = getTeamsShowing(window.location.href)
     }
   }
 }
