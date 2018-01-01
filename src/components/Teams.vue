@@ -76,8 +76,8 @@ export default {
         error: self.showErrorModal
       })
     },
-    viewProject: function (project) {
-      window.open(project.url, '_blank')
+    viewTeam: function (team) {
+      window.open(team.url, '_blank')
     },
     unselected: function (team) {
       return this.$store.state.selectedTeam.trelloId !== team.trelloId

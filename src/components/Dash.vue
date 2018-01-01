@@ -3,10 +3,16 @@
     <div v-if="loggedIn()">
       <div class="pa4 br--bottom br3">
         <div
-          v-if="selectedTeam().displayName"
           @click="onProjectsClick()"
+          v-show="selectedProject().name"
           class="grow pa2 pointer br3 mb2 tc center">
           {{ selectedProject().name }}
+        </div>
+        <div
+          @click="onProjectsClick()"
+          v-if="!selectedProject().name && selectedTeam().displayName"
+          class="grow pointer br3 mb2 ba b--white pa3 br3">
+          Select a project
         </div>
         <section class="grow pa2 pointer br3 mb2" @click="onTeamsClick()">
           <div
@@ -20,8 +26,16 @@
             Select a team
           </div>
         </section>
-        <div class="pa2 br3 tc center">
+        <div
+          v-show="balance()"
+          class="pa2 br3 tc center">
           {{ balance() }} ETH
+        </div>
+        <div
+          @click="onDepositClick()"
+          v-if="!balance()"
+          class="grow center pointer br3 mb2 ba b--white pa3 br3">
+          Deposit ETH
         </div>
       </div>
     </div>
@@ -51,6 +65,9 @@ export default {
     },
     onTeamsClick: function () {
       this.$router.push(routeNameMappings.Teams)
+    },
+    onDepositClick: function () {
+      this.$router.push(routeNameMappings.DepositEth)
     }
   }
 }

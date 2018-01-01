@@ -24,7 +24,7 @@
           </div>
           <input class="mt3-ns w-100-ns w-90 bt-0 bl-0 br-0 b--black-20 f3 main-color" v-model="task.reward"/>
         </div>
-        <div class="fl-ns pl6-ns pt4 w-10-ns">
+        <div class="fl-ns pl5-ns pt4 w-10-ns">
           <img v-if="!isValidReward(task.reward)" src="static/assets/x.png" class="mw2"/>
           <img v-if="isValidReward(task.reward)" src="static/assets/checkmark.png" class="mw2-5"/>
         </div>
