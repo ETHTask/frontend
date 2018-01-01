@@ -59,7 +59,7 @@ export default {
   },
   computed: {
     workers: function () {
-      return this.$store.state.loggedInUser.selectedProject.workers
+      return this.$store.state.selectedProject.workers
     },
     isFormValid: function () {
       return this.workers.every(worker => isValidAddress(worker.ethAddress))
@@ -85,7 +85,7 @@ export default {
 
       this.$http.post('/trello/workers/update', {
         workers: this.workers,
-        projectId: this.$store.state.loggedInUser.selectedProject.trelloId
+        projectId: this.$store.state.selectedProject.trelloId
       })
         .then(response => {
           this.modalConfigObject = {
@@ -101,15 +101,15 @@ export default {
     },
     importWorkers: function () {
       this.$http.post('/trello/workers', {
-        projectId: this.$store.state.loggedInUser.selectedProject.trelloId,
-        orgId: this.$store.state.loggedInUser.selectedTeam.trelloName,
+        projectId: this.$store.state.selectedProject.trelloId,
+        orgId: this.$store.state.selectedTeam.trelloName,
         token: this.$store.state.trelloToken
       })
         .then(response => {
           return response.data
         })
         .then(workersFromAPI => {
-          const workersFromStore = this.$store.state.loggedInUser.selectedProject.workers
+          const workersFromStore = this.$store.state.selectedProject.workers
           this.$store.commit('setWorkers', [workersFromAPI, workersFromStore])
         })
     }

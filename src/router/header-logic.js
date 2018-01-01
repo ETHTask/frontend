@@ -32,16 +32,6 @@ export const getHamburgerShowing = (path) => {
   return true
 }
 
-export const getBalanceShowing = (path) => {
-  if (path.includes(routeNameMappings.Login.path)) {
-    return false
-  }
-  if (path.includes(routeNameMappings.SignUp.path)) {
-    return false
-  }
-  return true
-}
-
 export const getDepositShowing = (path) => {
   if (path.includes(routeNameMappings.Login.path)) {
     return false
@@ -50,32 +40,6 @@ export const getDepositShowing = (path) => {
     return false
   }
   if (path.includes(routeNameMappings.DepositEth.path)) {
-    return false
-  }
-  return true
-}
-
-export const getProjectsShowing = (path) => {
-  if (path.includes(routeNameMappings.Login.path)) {
-    return false
-  }
-  if (path.includes(routeNameMappings.SignUp.path)) {
-    return false
-  }
-  if (path.includes(routeNameMappings.Projects.path)) {
-    return false
-  }
-  return true
-}
-
-export const getTeamsShowing = (path) => {
-  if (path.includes(routeNameMappings.Login.path)) {
-    return false
-  }
-  if (path.includes(routeNameMappings.SignUp.path)) {
-    return false
-  }
-  if (path.includes(routeNameMappings.Teams.path)) {
     return false
   }
   return true

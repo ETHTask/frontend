@@ -96,6 +96,7 @@ export default {
           }
           self.showModal = true
         } else {
+          this.$store.commit('setLoggedIn', true)
           this.$store.commit('setLoggedInUser', response.data)
           this.$router.push(routeNameMappings.DepositEth)
         }

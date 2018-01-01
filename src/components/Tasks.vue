@@ -55,7 +55,7 @@ export default {
     return {
       modalConfigObject: getDefaultInfoModalConfigObj(),
       showModal: false,
-      selectedProject: this.$store.state.loggedInUser.selectedProject
+      selectedProject: this.$store.state.selectedProject
     }
   },
   computed: {
@@ -108,7 +108,7 @@ export default {
       }
 
       this.$http.post('/trello/tasks/update', {
-        projectId: self.$store.state.loggedInUser.selectedProject.trelloId,
+        projectId: self.$store.state.selectedProject.trelloId,
         tasks: this.tasks
       })
         .then(response => {

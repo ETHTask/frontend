@@ -10,6 +10,7 @@ import App from './App'
 import router from './router'
 import PageHeader from '@/components/PageHeader'
 import InfoModal from '@/components/InfoModal'
+import Dash from '@/components/Dash'
 import NavModal from '@/components/NavModal'
 import { state, mutations } from './store'
 
@@ -20,6 +21,7 @@ Vue.use(VueAxios, axios)
 Vue.use(VueClipboard)
 Vue.component('page-header', PageHeader)
 Vue.component('info-modal', InfoModal)
+Vue.component('dash', Dash)
 Vue.component('nav-modal', NavModal)
 
 /* eslint-disable no-new */
