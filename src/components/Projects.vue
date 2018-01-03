@@ -51,6 +51,9 @@ export default {
       rc
     }
   },
+  created () {
+    this.importProjects()
+  },
   computed: {
     projects: function () {
       return this.$store.state.loggedInUser.projects
@@ -92,7 +95,7 @@ export default {
     selectProject: function (project, event) {
       event.stopPropagation()
       this.$http.post('/trello/projects/update', {
-        projects: this.projects
+        project: project
       })
         .then(res => {
           if (res.error) {

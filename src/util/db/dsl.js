@@ -24,3 +24,11 @@ export const taskDSL = {
   name: 'name',
   url: 'url'
 }
+
+export const taskAddons = {
+  reward: ''
+}
+
+export const workerAddons = {
+  ethAddress: ''
+}

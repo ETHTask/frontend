@@ -2,16 +2,23 @@ import {
   projectDSL,
   workerDSL,
   taskDSL,
-  teamDSL
+  teamDSL,
+  taskAddons,
+  workerAddons
 } from './dsl'
 
 export const createWorker = (worker) => {
-  return Object.keys(worker).reduce((acc, field) => {
+  const initialObj = Object.keys(worker).reduce((acc, field) => {
     if (workerDSL[field]) {
       acc[workerDSL[field]] = worker[field]
     }
     return acc
   }, {})
+
+  return Object.keys(workerAddons).reduce((acc, field) => {
+    acc[field] = workerAddons[field]
+    return acc
+  }, initialObj)
 }
 
 export const createTeam = (team) => {
@@ -33,10 +40,15 @@ export const createProject = (project) => {
 }
 
 export const createTask = (task) => {
-  return Object.keys(task).reduce((acc, field) => {
+  const initialObj = Object.keys(task).reduce((acc, field) => {
     if (taskDSL[field]) {
       acc[taskDSL[field]] = task[field]
     }
     return acc
   }, {})
+
+  return Object.keys(taskAddons).reduce((acc, field) => {
+    acc[field] = taskAddons[field]
+    return acc
+  }, initialObj)
 }

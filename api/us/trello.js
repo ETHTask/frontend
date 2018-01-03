@@ -90,11 +90,11 @@ function trelloTasksPUT (req, res) {
 
 function trelloProjectsPUT (req, res) {
   var id = req.session.userId;
-  var projects = req.body.projects;
+  var project = req.body.project;
 
   return Organization.update(
-    { "_id" : id },
-    { $set : {"projects" : projects} }
+    { "_id" : id, 'projects.$.trelloId' : { $ne: project.trelloId } },
+    { $push : {"projects" : project} }
   )
     .then(function(org) {
       res.send(org);

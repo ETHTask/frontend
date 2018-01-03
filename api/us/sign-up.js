@@ -14,7 +14,7 @@ function signUp (req, res) {
       repLastName: req.body.lastName,
       ethBalance: 100,
       ethAddress: '0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae',
-      workers: [],
+      projects: [],
       tasks: []
     });
     Organization.findOne({ email: req.body.email })

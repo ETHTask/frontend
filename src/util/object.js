@@ -7,7 +7,7 @@ import {
 import { idDSL } from './db/dsl'
 
 export const mergeStoreAndAPIWorkers = (fromAPI, fromStore, configObj) => {
-  const mergedList = [...fromStore]
+  const mergedList = []
 
   const idToEl = fromStore.reduce((acc, el) => {
     acc[el[idDSL[1]]] = el
@@ -17,6 +17,8 @@ export const mergeStoreAndAPIWorkers = (fromAPI, fromStore, configObj) => {
   fromAPI.forEach(el => {
     if (!idToEl[el[idDSL[0]]]) {
       mergedList.push(createWorker(el))
+    } else {
+      mergedList.push(idToEl[el[idDSL[0]]])
     }
   })
 
@@ -24,7 +26,7 @@ export const mergeStoreAndAPIWorkers = (fromAPI, fromStore, configObj) => {
 }
 
 export const mergeStoreAndAPITasks = (fromAPI, fromStore, configObj) => {
-  const mergedList = [...fromStore]
+  const mergedList = []
 
   const idToEl = fromStore.reduce((acc, el) => {
     acc[el[idDSL[1]]] = el
@@ -34,6 +36,8 @@ export const mergeStoreAndAPITasks = (fromAPI, fromStore, configObj) => {
   fromAPI.forEach(el => {
     if (!idToEl[el[idDSL[0]]]) {
       mergedList.push(createTask(el))
+    } else {
+      mergedList.push(idToEl[el[idDSL[0]]])
     }
   })
 
@@ -41,7 +45,7 @@ export const mergeStoreAndAPITasks = (fromAPI, fromStore, configObj) => {
 }
 
 export const mergeStoreAndAPITeams = (fromAPI, fromStore, configObj) => {
-  const mergedList = [...fromStore]
+  const mergedList = []
 
   const idToEl = fromStore.reduce((acc, el) => {
     acc[el[idDSL[1]]] = el
@@ -51,6 +55,8 @@ export const mergeStoreAndAPITeams = (fromAPI, fromStore, configObj) => {
   fromAPI.forEach(el => {
     if (!idToEl[el[idDSL[0]]]) {
       mergedList.push(createTeam(el))
+    } else {
+      mergedList.push(idToEl[el[idDSL[0]]])
     }
   })
 
@@ -58,7 +64,7 @@ export const mergeStoreAndAPITeams = (fromAPI, fromStore, configObj) => {
 }
 
 export const mergeStoreAndAPIProjects = (fromAPI, fromStore, configObj) => {
-  const mergedList = [...fromStore]
+  const mergedList = []
 
   const idToEl = fromStore.reduce((acc, el) => {
     acc[el[idDSL[1]]] = el
@@ -68,6 +74,8 @@ export const mergeStoreAndAPIProjects = (fromAPI, fromStore, configObj) => {
   fromAPI.forEach(el => {
     if (!idToEl[el[idDSL[0]]]) {
       mergedList.push(createProject(el))
+    } else {
+      mergedList.push(idToEl[el[idDSL[0]]])
     }
   })
 
