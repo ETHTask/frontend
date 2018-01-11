@@ -25,7 +25,7 @@ export const mergeStoreAndAPIWorkers = (fromAPI, fromStore, configObj) => {
   return mergedList
 }
 
-export const mergeStoreAndAPITasks = (fromAPI, fromStore, configObj) => {
+export const mergeStoreAndAPITasks = (fromAPI, fromStore, doneId) => {
   const mergedList = []
 
   const idToEl = fromStore.reduce((acc, el) => {
@@ -34,10 +34,33 @@ export const mergeStoreAndAPITasks = (fromAPI, fromStore, configObj) => {
   }, {})
 
   fromAPI.forEach(el => {
-    if (!idToEl[el[idDSL[0]]]) {
-      mergedList.push(createTask(el))
-    } else {
-      mergedList.push(idToEl[el[idDSL[0]]])
+    if (el[idDSL[0]] !== doneId) {
+      if (!idToEl[el[idDSL[0]]]) {
+        mergedList.push(createTask(el))
+      } else {
+        mergedList.push(idToEl[el[idDSL[0]]])
+      }
+    }
+  })
+
+  return mergedList
+}
+
+export const mergeStoreAndAPITasksDone = (fromAPI, fromStore, doneId) => {
+  const mergedList = []
+
+  const idToEl = fromStore.reduce((acc, el) => {
+    acc[el[idDSL[1]]] = el
+    return acc
+  }, {})
+
+  fromAPI.forEach(el => {
+    if (el[idDSL[0]] === doneId) {
+      if (!idToEl[el[idDSL[0]]]) {
+        mergedList.push(createTask(el))
+      } else {
+        mergedList.push(idToEl[el[idDSL[0]]])
+      }
     }
   })
 

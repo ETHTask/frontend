@@ -147,6 +147,7 @@ export default {
         .then(tasksFromAPI => {
           const tasksFromStore = this.selectedProject.tasks
           this.$store.commit('setTasks', [tasksFromAPI, tasksFromStore])
+          this.$store.commit('setDoneTasks', [tasksFromAPI, tasksFromStore])
         })
     }
   }

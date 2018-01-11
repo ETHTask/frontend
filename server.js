@@ -8,6 +8,7 @@ var signUp = require('./api/us/sign-up');
 var login = require('./api/us/login');
 var logout = require('./api/us/logout');
 var trelloC = require('./api/us/trello');
+var smartContractC = require('./api/us/smart-contract');
 
 mongoose.connect('mongodb://localhost:27017');
 mongoose.Promise = global.Promise;
@@ -24,12 +25,14 @@ app.use(serveStatic(__dirname + "/dist"));
 app.post('/signUp', signUp)
 app.post('/login', login)
 app.post('/trello/projects', trelloC.trelloProjectsGET);
+app.post('/trello/lists', trelloC.trelloListsGETPOST);
 app.post('/trello/tasks', trelloC.trelloTasksGET);
 app.post('/trello/workers', trelloC.trelloWorkersGET);
 app.post('/trello/workers/update', trelloC.trelloWorkersPUT);
 app.post('/trello/tasks/update', trelloC.trelloTasksPUT);
 app.post('/trello/projects/update', trelloC.trelloProjectsPUT);
 app.post('/trello/teams', trelloC.trelloTeamsGET);
+app.post('/smart-contract/register', smartContractC.smartContractRegister);
 app.get('/logout', logout);
 
 app.listen(8080);

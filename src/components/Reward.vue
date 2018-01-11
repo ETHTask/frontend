@@ -1,6 +1,6 @@
 <template>
   <div class="tc catamaran pa4">
-    <div class="ba bg-white b--main-color bw1 br3 pt3 pb2 mw6 center mt4">
+    <div v-for="task in doneTasks" class="ba bg-white b--main-color bw1 br3 pt3 pb2 mw6 center mt4">
       <div class="f3">Task ID: {{ taskID }}</div>
       <img src="static/assets/eye.png" class="mw3 mt3"/>
     </div>
@@ -28,8 +28,7 @@ export default {
   name: 'Reward',
   data () {
     return {
-      taskID: this.$store.state.finishedTask.id,
-      hero: this.$store.state.finishedTask.hero,
+      doneTasks: this.$store.state.doneTasks,
       showModal: false,
       modalConfigObject: getDefaultInfoModalConfigObj()
     }

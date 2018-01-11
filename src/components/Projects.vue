@@ -110,8 +110,17 @@ export default {
             this.showModal = true
           } else {
             this.$store.commit('setSelectedProject', project)
-            this.$router.push(routeNameMappings.Tasks)
           }
+        })
+        .then(() => {
+          return this.$http.post('/trello/lists', {
+            token: this.$store.state.trelloToken,
+            projectId: project.trelloId
+          })
+        })
+        .then(res => {
+          this.$store.commit('setDoneTrelloId', res.data)
+          this.$router.push(routeNameMappings.Tasks)
         })
     }
   }

@@ -10,6 +10,8 @@ var OrganizationSchema = new Schema({
     password: String,
     ethBalance: Number,
     ethAddress: String,
+    doneTrelloId: String,
+    registeredSmartContract: Boolean,
     teams: [
       new Schema({
         trelloName: String,
