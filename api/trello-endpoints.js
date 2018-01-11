@@ -6,5 +6,7 @@ module.exports = {
   GET_WORKERS_P: 'https://api.trello.com/1/organizations/',
   GET_WORKERS_S: '/members',
   GET_TEAMS: 'https://api.trello.com/1/members/me/organizations',
-  GET_WORKER: 'https://api.trello.com/1/members/'
+  GET_WORKER: 'https://api.trello.com/1/members/',
+  GET_LISTS_P: 'https://api.trello.com/1/boards/',
+  GET_LISTS_S: '/lists'
 }

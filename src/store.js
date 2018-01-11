@@ -1,19 +1,15 @@
 import {
   mergeStoreAndAPIWorkers,
   mergeStoreAndAPITasks,
+  mergeStoreAndAPITasksDone,
   mergeStoreAndAPIProjects,
   mergeStoreAndAPITeams
 } from './util/object'
 
 export const state = {
   loggedIn: false,
-  finishedTask: {
-    hero: {
-      imageUrl: 'static/assets/kate.png',
-      name: 'Kate Coco'
-    },
-    id: '12'
-  },
+  doneTasks: [],
+  doneTrelloId: '',
   trelloToken: '',
   selectedTeam: {
     trelloId: '',
@@ -35,7 +31,8 @@ export const state = {
     repFirstName: '',
     repLastName: '',
     projects: [],
-    teams: []
+    teams: [],
+    registeredSmartContract: false
   }
 }
 
@@ -65,8 +62,14 @@ export const mutations = {
   setTasks (state, tasks) {
     const tasksFromAPI = tasks[0]
     const tasksFromStore = tasks[1]
-    state.selectedProject.tasks = mergeStoreAndAPITasks(tasksFromAPI, tasksFromStore)
+    state.selectedProject.tasks = mergeStoreAndAPITasks(tasksFromAPI, tasksFromStore, state.doneTrelloId)
     console.log('Trello tasks set: ', state.selectedProject.tasks)
+  },
+  setDoneTasks (state, tasks) {
+    const tasksFromAPI = tasks[0]
+    const tasksFromStore = tasks[1]
+    state.doneTasks = mergeStoreAndAPITasksDone(tasksFromAPI, tasksFromStore, state.doneTrelloId)
+    console.log('Trello done-tasks set: ', state.doneTasks)
   },
   setSelectedProject (state, project) {
     state.selectedProject = project
@@ -91,6 +94,12 @@ export const mutations = {
   setLoggedInUser (state, user) {
     state.loggedInUser = user
     console.log('Logged in user set: ', state.loggedInUser)
+  },
+  setRegisteredSmartContract (state, flag) {
+    const user = {...state.loggedInUser}
+    user.registeredSmartContract = flag
+    state.loggedInUser = user
+    console.log('Registered smart contract set: ', state.loggedInUser.registeredSmartContract)
   },
   setLoggedIn (state, loggedIn) {
     state.loggedIn = loggedIn

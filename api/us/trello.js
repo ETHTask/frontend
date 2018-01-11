@@ -22,6 +22,38 @@ function trelloTasksGET (req, res) {
     });
 }
 
+function trelloListsGETPOST (req, res) {
+  var id = req.session.userId;
+  var token = req.body.token;
+  var projectId = req.body.projectId;
+  var GET_LISTS_P = trelloEndpoints.GET_LISTS_P;
+  var GET_LISTS_S = trelloEndpoints.GET_LISTS_S;
+  var doneTrelloId;
+
+  var endpoint = `${GET_LISTS_P + projectId + GET_LISTS_S}?key=${trelloKey}&token=${token}`;
+  axios.get(endpoint)
+    .then(function(lists) {
+      return lists.data.find(function (list) {
+        return list.name.toLowerCase() === 'done'
+      }).id;
+    })
+    .then(function (doneListId) {
+      doneTrelloId = doneListId
+      return Organization.update(
+        { "_id" : id },
+        { $set : {"doneTrelloId" : doneTrelloId} }
+      )
+    })
+    .then(function() {
+      res.send({data: doneTrelloId});
+      return;
+    })
+    .catch(function(err) {
+      console.log(err);
+      res.send({error: err})
+    });
+}
+
 function trelloWorkersGET (req, res) {
   var token = req.body.token;
   var orgId = req.body.orgId;
@@ -142,5 +174,6 @@ module.exports = {
   trelloWorkersPUT: trelloWorkersPUT,
   trelloWorkersGET: trelloWorkersGET,
   trelloTasksGET: trelloTasksGET,
-  trelloTeamsGET: trelloTeamsGET
+  trelloTeamsGET: trelloTeamsGET,
+  trelloListsGETPOST: trelloListsGETPOST
 };
