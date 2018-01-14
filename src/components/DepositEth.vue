@@ -60,14 +60,18 @@ export default {
           })
         })
         .then(() => {
-          this.$store.commit('setRegisteredSmartContract', true)
-          this.getBalance()
-          this.getAddress()
-          return this.http.post('smart-contract/register')
+          // this.$store.commit('setRegisteredSmartContract', true)
+          // this.getBalance()
+          // this.getAddress()
+          // return this.$http.post('smart-contract/register')
         })
         .catch(e => {
           console.log(e)
         })
+      this.$store.commit('setRegisteredSmartContract', true)
+      this.getBalance()
+      this.getAddress()
+      this.$http.post('/smart-contract/register')
     },
     checkAndInstatiateWeb3: function () {
       if (typeof window.web3 !== 'undefined') {
@@ -95,8 +99,8 @@ export default {
           })
         })
         .then(balance => {
-          console.log('balance', balance)
           this.balance = window.web3.fromWei(balance, 'ether')
+          this.$store.commit('setBalance', +this.balance)
         })
         .catch(e => {
           console.log(e)

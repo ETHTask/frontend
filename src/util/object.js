@@ -4,7 +4,7 @@ import {
   createProject,
   createTeam
 } from './db/transform'
-import { idDSL } from './db/dsl'
+import { idDSL, TASK_CATEGORY_ID } from './db/dsl'
 
 export const mergeStoreAndAPIWorkers = (fromAPI, fromStore, configObj) => {
   const mergedList = []
@@ -34,7 +34,7 @@ export const mergeStoreAndAPITasks = (fromAPI, fromStore, doneId) => {
   }, {})
 
   fromAPI.forEach(el => {
-    if (el[idDSL[0]] !== doneId) {
+    if (el[TASK_CATEGORY_ID] !== doneId) {
       if (!idToEl[el[idDSL[0]]]) {
         mergedList.push(createTask(el))
       } else {
@@ -55,7 +55,7 @@ export const mergeStoreAndAPITasksDone = (fromAPI, fromStore, doneId) => {
   }, {})
 
   fromAPI.forEach(el => {
-    if (el[idDSL[0]] === doneId) {
+    if (el[TASK_CATEGORY_ID] === doneId) {
       if (!idToEl[el[idDSL[0]]]) {
         mergedList.push(createTask(el))
       } else {

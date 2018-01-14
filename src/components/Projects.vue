@@ -76,8 +76,8 @@ export default {
           return response.data
         })
         .then(projectsFromAPI => {
-          const projectsFromStore = this.$store.state.loggedInUser.projects
-          this.$store.commit('setProjects', [projectsFromAPI, projectsFromStore])
+          const projectsFromDB = this.$store.state.projectsFromDB
+          this.$store.commit('setProjects', [projectsFromAPI, projectsFromDB])
         })
     },
     showErrorModal: function () {
@@ -119,7 +119,7 @@ export default {
           })
         })
         .then(res => {
-          this.$store.commit('setDoneTrelloId', res.data)
+          this.$store.commit('setDoneTrelloId', res.data.id)
           this.$router.push(routeNameMappings.Tasks)
         })
     }

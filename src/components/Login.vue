@@ -81,6 +81,7 @@ export default {
         } else {
           this.$store.commit('setLoggedIn', true)
           this.$store.commit('setLoggedInUser', response.data)
+          this.$store.commit('setProjectsFromDB', response.data.projects)
           this.$router.push(routeNameMappings.DepositEth)
         }
       })

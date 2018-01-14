@@ -22,12 +22,11 @@ export const state = {
     tasks: [],
     workers: []
   },
+  balance: 0,
+  projectsFromDB: [],
   loggedInUser: {
     name: '',
-    logo: '',
     email: '',
-    ethTaskAddress: '',
-    ethTaskBalance: 0,
     repFirstName: '',
     repLastName: '',
     projects: [],
@@ -65,6 +64,10 @@ export const mutations = {
     state.selectedProject.tasks = mergeStoreAndAPITasks(tasksFromAPI, tasksFromStore, state.doneTrelloId)
     console.log('Trello tasks set: ', state.selectedProject.tasks)
   },
+  setProjectsFromDB (state, projects) {
+    state.projectsFromDB = projects
+    console.log('Trello projects DB set: ', state.projectsFromDB)
+  },
   setDoneTasks (state, tasks) {
     const tasksFromAPI = tasks[0]
     const tasksFromStore = tasks[1]
@@ -94,6 +97,14 @@ export const mutations = {
   setLoggedInUser (state, user) {
     state.loggedInUser = user
     console.log('Logged in user set: ', state.loggedInUser)
+  },
+  setBalance (state, balance) {
+    state.balance = balance
+    console.log('Balance set: ', state.balance)
+  },
+  setDoneTrelloId (state, id) {
+    state.doneTrelloId = id
+    console.log('Set done trello ID: ', state.doneTrelloId)
   },
   setRegisteredSmartContract (state, flag) {
     const user = {...state.loggedInUser}

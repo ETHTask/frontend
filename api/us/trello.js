@@ -45,7 +45,7 @@ function trelloListsGETPOST (req, res) {
       )
     })
     .then(function() {
-      res.send({data: doneTrelloId});
+      res.send({id: doneTrelloId});
       return;
     })
     .catch(function(err) {
@@ -124,15 +124,28 @@ function trelloProjectsPUT (req, res) {
   var id = req.session.userId;
   var project = req.body.project;
 
-  return Organization.update(
-    { "_id" : id, 'projects.$.trelloId' : { $ne: project.trelloId } },
-    { $push : {"projects" : project} }
-  )
+  return Organization
+    .findOne({"_id" : id, 'projects.trelloId': project.trelloId})
     .then(function(org) {
-      res.send(org);
+      if (!org) {
+        return Organization.update(
+          {
+            "_id" : id
+          },
+          { $push : {"projects" : project} }
+        )
+      }
       return;
     })
+    .then(org => {
+      if (org) {
+         res.send(org);
+      } else {
+        res.send({});
+      }
+    })
     .catch(function(err) {
+      console.log('err', err)
       res.send({error: err})
     });
 }

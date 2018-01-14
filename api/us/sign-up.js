@@ -12,10 +12,9 @@ function signUp (req, res) {
       password: req.body.password,
       repFirstName: req.body.firstName,
       repLastName: req.body.lastName,
-      ethBalance: 100,
-      ethAddress: '0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae',
       projects: [],
-      tasks: []
+      tasks: [],
+      registeredSmartContract: false
     });
     Organization.findOne({ email: req.body.email })
       .then(org => {

@@ -58,6 +58,9 @@ export default {
       selectedProject: this.$store.state.selectedProject
     }
   },
+  created () {
+    this.importTasks()
+  },
   computed: {
     tasks: function () {
       return this.selectedProject.tasks
@@ -81,7 +84,6 @@ export default {
       const modalTitle = 'Oops'
       const modalTheme = 'bg-danger-color'
 
-      console.log('tasks, man', this.tasks)
       if (!this.isFormValid) {
         this.modalConfigObject = {
           title: modalTitle,
@@ -95,7 +97,7 @@ export default {
         return
       }
 
-      if (this.totalRewards > this.$store.state.loggedInUser.ethBalance) {
+      if (this.totalRewards > this.$store.state.balance) {
         this.modalConfigObject = {
           title: modalTitle,
           message: 'Sorry, the total rewards you entered exceed your ETH balance! Lower the rewards or deposit more ETH :)',

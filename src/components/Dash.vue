@@ -27,13 +27,13 @@
           </div>
         </section>
         <div
-          v-show="balance()"
+          v-show="showBalance || balance()"
           class="pa2 br3 tc center">
           {{ balance() }} ETH
         </div>
         <div
           @click="onDepositClick()"
-          v-if="!balance()"
+          v-if="!balance() && !showBalance"
           class="grow center pointer br3 mb2 ba b--white pa3 br3">
           Deposit ETH
         </div>
@@ -47,6 +47,7 @@ import routeNameMappings from '../router/route-name-mappings'
 
 export default {
   name: 'Dash',
+  props: ['showBalance'],
   methods: {
     selectedTeam: function () {
       return this.$store.state.selectedTeam
@@ -58,7 +59,7 @@ export default {
       return this.$store.state.selectedProject
     },
     balance: function () {
-      return this.$store.state.loggedInUser.ethBalance
+      return this.$store.state.balance
     },
     onProjectsClick: function () {
       this.$router.push(routeNameMappings.Projects)

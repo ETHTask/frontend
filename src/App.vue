@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="bg-main-gray vh-100">
     <page-header :configObj="headerConfigObj"></page-header>
-    <dash></dash>
+    <dash :showBalance="!headerConfigObj.showDeposit"></dash>
     <router-view/>
     <info-modal v-show="showInfoModal" :configObj="infoModalConfigObject"></info-modal>
     <nav-modal v-show="showNavModal" :configObj="navModalConfigObject"></nav-modal>
@@ -38,7 +38,7 @@ export default {
   methods: {
     onBalanceClick: function () {
       const self = this
-      const balance = this.$store.state.loggedInUser.ethBalance
+      const balance = this.$store.state.balance
       this.infoModalConfigObject = {
         title: 'Your EthTask balance',
         message: `${balance} ETH`,

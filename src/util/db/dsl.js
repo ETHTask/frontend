@@ -1,4 +1,5 @@
 export const idDSL = ['id', 'trelloId']
+export const TASK_CATEGORY_ID = 'idList'
 
 export const projectDSL = {
   id: 'trelloId',
